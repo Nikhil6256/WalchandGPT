@@ -1,0 +1,99 @@
+WALCHAND COLLEGE OF ENGINEERING, SANGLI
+DEPARTMENTS, ACADEMIC PROGRAMS & INTAKE CAPACITY
+
+1. OVERVIEW OF DEPARTMENTS
+Walchand College of Engineering houses the following academic departments:
+- Department of Computer Science and Engineering (CSE)
+- Department of Information Technology (IT)
+- Department of Artificial Intelligence and Machine Learning (AI & ML)
+- Department of Robotics and Automation
+- Department of Electronics Engineering
+- Department of Electrical Engineering
+- Department of Mechanical Engineering
+- Department of Civil Engineering
+- Department of Applied Mechanics
+- Department of Design
+- Department of Humanities and Sciences
+- Centre of Inter & Multidisciplinary Research Collaboration and Learning Excellence (CIRCLE)
+- Polytechnic (Diploma) Wing
+
+2. UNDERGRADUATE (B.TECH) PROGRAMS (4 YEARS)
+- B.Tech in Computer Science and Engineering:
+  * Established: 1984
+  * Intake: 120 (CAP) + Supernumerary quotas (EWS, TFWS, NRI/PIO)
+  * Accreditation: NBA Accredited
+  * Focus areas: Algorithms, Cloud Computing, Operating Systems, Machine Learning, Cyber Security, Full-Stack Software Engineering.
+  * Labs: High Performance Computing Lab, Advanced Networking Lab, Database Systems Lab, Software Engineering Lab.
+
+- B.Tech in Information Technology:
+  * Established: 2001
+  * Intake: 60 (CAP) + TFWS/EWS
+  * Accreditation: NBA Accredited
+  * Focus areas: Web & Mobile App Development, Distributed Systems, Cloud Architecture, DevOps, Data Analytics.
+
+- B.Tech in Artificial Intelligence and Machine Learning (AI & ML):
+  * Newly expanded cutting-edge specialization
+  * Focus areas: Deep Learning, Natural Language Processing, Computer Vision, Generative AI, Reinforcement Learning, MLOps.
+
+- B.Tech in Robotics and Automation:
+  * Multidisciplinary branch blending mechanical, electrical, and computer intelligence.
+  * Focus areas: Industrial Robotics, Kinematics, Autonomous Systems, ROS (Robot Operating System), Embedded Controllers, Machine Vision.
+
+- B.Tech in Electronics Engineering:
+  * Established: 1986
+  * Intake: 60
+  * Accreditation: NBA Accredited
+  * Focus areas: Embedded Systems, VLSI Design, DSP, Communication Engineering, IoT Architecture.
+
+- B.Tech in Electrical Engineering:
+  * Established: 1955
+  * Intake: 60
+  * Accreditation: NBA Accredited
+  * Focus areas: Power Systems, Smart Grids, Electric Vehicle (EV) Technology, Renewable Energy, Industrial Automation & Drives (Siemens Lab).
+
+- B.Tech in Mechanical Engineering:
+  * Established: 1955
+  * Intake: 60
+  * Accreditation: NBA Accredited
+  * Focus areas: Thermal Engineering, Design & Finite Element Analysis, CAD/CAM/CAE (Dassault Lab), Production and Mechatronics.
+
+- B.Tech in Civil Engineering:
+  * Established: 1947 (Founding department)
+  * Intake: 60
+  * Accreditation: NBA Accredited
+  * Focus areas: Structural Engineering, Geotechnical Engineering, Environmental Engineering, Transportation, GIS & Remote Sensing.
+
+3. NEW SPECIALIZED UNDERGRADUATE & DUAL-DEGREE PROGRAMS
+- Bachelor of Design (B.Des):
+  * Focus on Product Design, Industrial Design, User Experience (UX/UI), and Sustainable Design.
+  * Supported by the AICTE IDEA Lab and rapid prototyping equipment.
+
+- Integrated B.Tech - M.Tech Programme (5 Years):
+  * Specialization: VLSI Design and Embedded Systems
+  * Integrated 5-year curriculum preparing students directly for leading semiconductor firms (NVIDIA, Intel, Qualcomm, Texas Instruments, AMD).
+
+4. POSTGRADUATE (M.TECH & MBA) PROGRAMS
+- Master of Technology (M.Tech) (2 Years):
+  * M.Tech in Civil Engineering (Structural Engineering)
+  * M.Tech in Civil Engineering (Environmental Engineering)
+  * M.Tech in Mechanical Engineering (Design Engineering)
+  * M.Tech in Mechanical Engineering (Production Engineering)
+  * M.Tech in Electrical Engineering (Power Systems)
+  * M.Tech in Electrical Engineering (Control Systems)
+  * M.Tech in Electronics Engineering
+  * M.Tech in Computer Science and Engineering
+
+- Master of Business Administration (MBA) (2 Years):
+  * Newly introduced program under Shivaji University.
+  * Specializations in Operations & Supply Chain, Technology Management, Finance, Human Resources, and Marketing.
+  * Admission through Maharashtra MBA-CET / CAT / CMAT through Centralized Admission Process (CAP).
+
+5. POLYTECHNIC (DIPLOMA) PROGRAMS (3 YEARS)
+- Diploma in Civil Engineering
+- Diploma in Mechanical Engineering
+- Diploma in Electrical Engineering
+- Diploma in Industrial Electronics Engineering
+
+6. DOCTORAL RESEARCH (PH.D.)
+- Recognized research center under Shivaji University Kolhapur.
+- Doctoral scholars conduct research under QIP (Quality Improvement Programme), TEQIP sponsorships, and industry-sponsored grants.

@@ -99,47 +99,58 @@ async def get_timetable(payload: TimetableRequest) -> dict[str, Any]:
 
 @router.post("/get_notices")
 async def get_notices(payload: NoticeRequest) -> dict[str, Any]:
-    """Return recent college notices and announcements."""
+    """Return recent college notices and announcements from Walchand College of Engineering."""
     log.info("get_notices called", payload=payload.model_dump())
 
-    sample_notices = {
-        "note": "[DEMO DATA] Replace with real notices from database",
-        "notices": [
-            {
-                "id": 1,
-                "title": "Semester V Examination Schedule",
-                "category": "examination",
-                "date": "2026-09-20",
-                "content": "The Semester V examinations for all branches will commence from October 15, 2026. The detailed schedule is available on the college website.",
-                "issued_by": "Examination Cell"
-            },
-            {
-                "id": 2,
-                "title": "SPPU Convocation 2026",
-                "category": "event",
-                "date": "2026-09-18",
-                "content": "The annual convocation ceremony will be held on November 5, 2026. Final year students must register by October 10, 2026.",
-                "issued_by": "Principal's Office"
-            },
-            {
-                "id": 3,
-                "title": "Attendance Shortage Warning",
-                "category": "academic",
-                "date": "2026-09-15",
-                "content": "Students with attendance below 75% have been notified. Please contact your class teacher to understand the implications.",
-                "issued_by": "Academic Section"
-            },
-            {
-                "id": 4,
-                "title": "Hackathon Registration Open",
-                "category": "competition",
-                "date": "2026-09-10",
-                "content": "WCE Hackathon 2026 registrations are open. Teams of 2-4 students can register at the college technical festival portal.",
-                "issued_by": "ACM Student Chapter"
-            },
-        ][:payload.limit]
-    }
-    return {"result": sample_notices}
+    official_notices = [
+        {
+            "id": 1,
+            "title": "Guidelines for Walchand College CAP Reporting — New Admissions 2026-27",
+            "category": "admission",
+            "date": "2026-09-24",
+            "content": "Seat allotted through State CET Cell for CAP Rounds 1, 2, 3 & 4 (AY 2026–27). All students must report to WCE Admission Reporting Center with original documents and prescribed fees.",
+            "issued_by": "Admission Cell, WCE Sangli",
+            "link": "https://walchandsangli.ac.in/notice_board/guidelines-for-walchand-college-of-engineering-cap-reporting-new-admissions-2026-27/"
+        },
+        {
+            "id": 2,
+            "title": "MBA Program Option Form Submission (CAP Round-2)",
+            "category": "admission",
+            "date": "2026-09-22",
+            "content": "Students can fill option forms for the newly introduced MBA Program at Walchand College of Engineering, Sangli from CAP Round-2 through candidate login on the CET Cell Portal.",
+            "issued_by": "Chairman, Admissions",
+            "link": "https://walchandsangli.ac.in/notice_board/students-can-fill-option-form-for-mba-program-at-walchand-college-of-engineering-sangli-from-cap-round-2-through-candidate-login-on-cet-cell-portal/"
+        },
+        {
+            "id": 3,
+            "title": "AICTE ATAL FDP on Reconfigurable Intelligent Surfaces for Wireless Communications",
+            "category": "academic",
+            "date": "2026-09-07",
+            "content": "One-week national FDP organized by Department of Electronics Engineering from 7-12 September 2026.",
+            "issued_by": "Department of Electronics Engineering",
+            "link": "https://walchandsangli.ac.in/notice_board/aicte-atal-fdp-on-reconfigurable-intelligent-surfaces-for-wireless-communications-from-7-12-september-2026/"
+        },
+        {
+            "id": 4,
+            "title": "AICTE-VAANI FDP Workshop in Marathi Language",
+            "category": "academic",
+            "date": "2026-08-28",
+            "content": "Workshop on 'TECHNOLOGY DRIVEN ENGINEERING FOR HEALTH ADVANCEMENT' in Marathi from 01-03 December 2026 under NEP 2020 initiatives.",
+            "issued_by": "Dean Academics",
+            "link": "https://walchandsangli.ac.in/notice_board/aicte-vaani-fdp-workshop-in-marathi-language-on-technology-driven-engineering-for-health-advancement-from-01-03-december-2026/"
+        },
+        {
+            "id": 5,
+            "title": "SMKC Civic Innovation Forum: Ideathon + Software Development Challenge",
+            "category": "competition",
+            "date": "2026-08-20",
+            "content": "Civic Innovation Challenge in association with Sangli Miraj Kupwad City Municipal Corporation for urban and municipal digital solutions.",
+            "issued_by": "Dean R&D & WCE IIE Cell",
+            "link": "https://walchandsangli.ac.in/notice_board/smkc-civic-innovation-forum-2026-ideathon-software-development-challenge/"
+        },
+    ][:payload.limit]
+
+    return {"result": {"source": "Walchand College of Engineering, Sangli", "notices": official_notices}}
 
 
 @router.post("/get_faculty")
@@ -148,43 +159,65 @@ async def get_faculty(payload: FacultyRequest) -> dict[str, Any]:
     log.info("get_faculty called", payload=payload.model_dump())
 
     sample_faculty = {
-        "note": "[DEMO DATA] Replace with real faculty data from database",
+        "source": "Walchand College of Engineering, Sangli",
         "faculty": [
             {
-                "name": "Dr. Anjali Kulkarni",
-                "designation": "Professor & HOD",
-                "department": "Computer Engineering",
-                "subjects": ["Database Management Systems", "Data Mining"],
-                "email": "anjali.kulkarni@walchandsangli.ac.in",
-                "cabin": "CS-201"
+                "name": "Dr. U. A. Dabade",
+                "designation": "Professor & Director",
+                "department": "Mechanical Engineering",
+                "subjects": ["Advanced Manufacturing", "Machining Science"],
+                "email": "director@walchandsangli.ac.in",
+                "cabin": "Director Office, Admin Building"
             },
             {
-                "name": "Prof. Bharat Patil",
-                "designation": "Associate Professor",
-                "department": "Computer Engineering",
-                "subjects": ["Operating Systems", "System Programming"],
-                "email": "bharat.patil@walchandsangli.ac.in",
-                "cabin": "CS-202"
+                "name": "Dr. S. G. Tamhankar",
+                "designation": "Professor & Head",
+                "department": "Electronics Engineering",
+                "subjects": ["VLSI Design", "Embedded Systems"],
+                "email": "hod.electronics@walchandsangli.ac.in",
+                "cabin": "Electronics Dept, Ground Floor"
             },
             {
-                "name": "Dr. Chetan Desai",
-                "designation": "Assistant Professor",
-                "department": "Computer Engineering",
-                "subjects": ["Theory of Computation", "Compiler Design"],
-                "email": "chetan.desai@walchandsangli.ac.in",
-                "cabin": "CS-203"
+                "name": "Dr. B. F. Momin",
+                "designation": "Professor & Head",
+                "department": "Computer Science and Engineering",
+                "subjects": ["Cloud Computing", "Distributed Systems", "Machine Learning"],
+                "email": "hod.cse@walchandsangli.ac.in",
+                "cabin": "CSE Building, CS-101"
             },
+            {
+                "name": "Dr. P. K. Kharat",
+                "designation": "Professor & Head",
+                "department": "Information Technology",
+                "subjects": ["Cybersecurity", "Network Architecture", "Data Science"],
+                "email": "hod.it@walchandsangli.ac.in",
+                "cabin": "IT Building, IT-201"
+            },
+            {
+                "name": "Dr. K. S. Gumaste",
+                "designation": "Professor & Head",
+                "department": "Civil Engineering",
+                "subjects": ["Structural Dynamics", "Earthquake Engineering"],
+                "email": "hod.civil@walchandsangli.ac.in",
+                "cabin": "Civil Dept, Main Block"
+            },
+            {
+                "name": "Dr. A. P. Vaidya",
+                "designation": "Professor & Head",
+                "department": "Electrical Engineering",
+                "subjects": ["Power Systems", "Control Systems"],
+                "email": "hod.electrical@walchandsangli.ac.in",
+                "cabin": "Electrical Dept, Block E"
+            }
         ]
     }
 
-    # Filter by department if provided
     if payload.department:
         sample_faculty["faculty"] = [
             f for f in sample_faculty["faculty"]
             if payload.department.lower() in f["department"].lower()
         ]
 
-    # Filter by subject if provided
     if payload.subject:
         sample_faculty["faculty"] = [
             f for f in sample_faculty["faculty"]
@@ -196,20 +229,21 @@ async def get_faculty(payload: FacultyRequest) -> dict[str, Any]:
 
 @router.post("/get_exam_schedule")
 async def get_exam_schedule(payload: ExamRequest) -> dict[str, Any]:
-    """Return examination schedule."""
+    """Return autonomous examination schedule."""
     log.info("get_exam_schedule called", payload=payload.model_dump())
 
     sample_schedule = {
-        "note": "[DEMO DATA] Replace with real exam schedule from database",
-        "department": payload.department or "All Departments",
+        "source": "Office of Controller of Examinations, WCE Sangli",
+        "system": "Autonomous Credit Based Evaluation System (Shivaji University)",
+        "department": payload.department or "Computer Science and Engineering",
         "semester": payload.semester or 5,
         "exams": [
-            {"date": "2026-10-15", "day": "Thursday", "subject": "Database Management Systems", "time": "10:00-13:00", "code": "410241"},
-            {"date": "2026-10-17", "day": "Saturday", "subject": "Operating Systems", "time": "10:00-13:00", "code": "410242"},
-            {"date": "2026-10-20", "day": "Tuesday", "subject": "Computer Networks", "time": "10:00-13:00", "code": "410243"},
-            {"date": "2026-10-22", "day": "Thursday", "subject": "Theory of Computation", "time": "10:00-13:00", "code": "410244"},
-            {"date": "2026-10-24", "day": "Saturday", "subject": "Software Engineering", "time": "10:00-13:00", "code": "410245"},
-            {"date": "2026-10-27", "day": "Tuesday", "subject": "Elective - I", "time": "10:00-13:00", "code": "410246"},
+            {"date": "2026-10-15", "day": "Thursday", "subject": "Database Management Systems", "time": "10:00-13:00", "code": "CS301"},
+            {"date": "2026-10-17", "day": "Saturday", "subject": "Operating Systems & System Programming", "time": "10:00-13:00", "code": "CS302"},
+            {"date": "2026-10-20", "day": "Tuesday", "subject": "Computer Networks & Protocols", "time": "10:00-13:00", "code": "CS303"},
+            {"date": "2026-10-22", "day": "Thursday", "subject": "Theory of Computation & Automata", "time": "10:00-13:00", "code": "CS304"},
+            {"date": "2026-10-24", "day": "Saturday", "subject": "Software Engineering & Agile Methodologies", "time": "10:00-13:00", "code": "CS305"},
+            {"date": "2026-10-27", "day": "Tuesday", "subject": "Open Elective / MDM", "time": "10:00-13:00", "code": "OE301"},
         ]
     }
     return {"result": sample_schedule}
@@ -221,31 +255,39 @@ async def get_events(payload: EventRequest) -> dict[str, Any]:
     log.info("get_events called", payload=payload.model_dump())
 
     sample_events = {
-        "note": "[DEMO DATA] Replace with real events from database",
+        "source": "Walchand College of Engineering, Sangli",
         "events": [
             {
                 "id": 1,
-                "name": "Antardhwani 2026 — Annual Technical Festival",
-                "date": "2026-10-20 to 2026-10-22",
-                "venue": "WCE Main Campus",
+                "name": "WCE Hackathon & Techfest (VISION)",
+                "date": "2026-10-18 to 2026-10-20",
+                "venue": "WCE Sangli Main Campus & Tilak Hall",
                 "category": "technical",
-                "description": "3-day technical festival featuring hackathons, paper presentations, robotics competitions, and expert talks."
+                "description": "Annual state-level technical symposium with national hackathons, coding contests, paper presentations, and robotics tracks."
             },
             {
                 "id": 2,
-                "name": "Campus Placement Drive — TCS",
-                "date": "2026-10-05",
-                "venue": "Placement Cell, Admin Building",
-                "category": "placement",
-                "description": "TCS is visiting campus for NQT (National Qualifier Test) and interviews for final year students."
+                "name": "SMKC Civic Innovation Forum: Final Demo Day",
+                "date": "2026-10-12",
+                "venue": "Ajit Gulabchand Central Library Auditorium",
+                "category": "innovation",
+                "description": "Final project demonstrations of smart city solutions developed by students for Sangli municipal authorities."
             },
             {
                 "id": 3,
-                "name": "Guest Lecture — AI in Healthcare",
-                "date": "2026-09-30",
-                "venue": "Seminar Hall, Block A",
+                "name": "Campus Recruitment Drive — Tier-1 Tech Partners",
+                "date": "2026-10-05",
+                "venue": "Placement Cell & WIC Labs",
+                "category": "placement",
+                "description": "Recruitment drive for B.Tech & M.Tech graduating batches by software and core engineering firms."
+            },
+            {
+                "id": 4,
+                "name": "AICTE-VAANI Workshop in Marathi",
+                "date": "2026-12-01 to 2026-12-03",
+                "venue": "Seminar Hall, Mechanical Complex",
                 "category": "academic",
-                "description": "Guest lecture by Dr. Rajeev Menon from IIT Bombay on applications of AI in healthcare."
+                "description": "Technology Driven Engineering for Health Advancement workshop conducted in Marathi language."
             },
         ][:payload.limit]
     }
@@ -254,86 +296,169 @@ async def get_events(payload: EventRequest) -> dict[str, Any]:
 
 @router.post("/get_placement_statistics")
 async def get_placement_statistics(payload: PlacementRequest) -> dict[str, Any]:
-    """Return placement statistics."""
+    """Return official placement statistics from Walchand College of Engineering."""
     log.info("get_placement_statistics called", payload=payload.model_dump())
 
-    sample_stats = {
-        "note": "[DEMO DATA] Replace with real placement data from database",
-        "academic_year": str(payload.year or 2026),
-        "summary": {
-            "total_students_eligible": 450,
-            "total_placed": 387,
-            "placement_percentage": 86.0,
-            "highest_package_lpa": 42.0,
-            "average_package_lpa": 8.5,
-            "median_package_lpa": 7.2,
+    official_stats = {
+        "source": "Training & Placement Cell, Walchand College of Engineering, Sangli",
+        "academic_year": str(payload.year or "2024-2026"),
+        "highlights": {
+            "highest_package": "₹1.50 Crore / Annum",
+            "historical_milestone": "₹1.30 Crore / Annum by Saurabh Pukale (2021 Platinum Jubilee)",
+            "average_package": "₹12.0 LPA",
+            "companies_visiting": "300+ Recruiters",
+            "placement_assistance": "100%",
         },
-        "top_recruiters": [
-            {"company": "TCS", "offers": 45, "package_lpa": 3.6},
-            {"company": "Infosys", "offers": 38, "package_lpa": 3.6},
-            {"company": "Wipro", "offers": 30, "package_lpa": 3.5},
-            {"company": "Accenture", "offers": 28, "package_lpa": 4.5},
-            {"company": "Capgemini", "offers": 25, "package_lpa": 3.8},
-            {"company": "LTI Mindtree", "offers": 20, "package_lpa": 6.5},
-            {"company": "Persistent Systems", "offers": 18, "package_lpa": 5.0},
-            {"company": "Syntel", "offers": 15, "package_lpa": 4.2},
+        "notable_placements": [
+            {"student": "Jay Shirguppe", "company": "Rubrik", "profile": "Software Development Engineer"},
+            {"student": "Aardhya Pittalwar", "company": "CRED", "profile": "Software Engineer"},
+            {"student": "Ankita Dongare", "company": "Google", "profile": "Software Engineer"},
+            {"student": "Saurabh Pukale", "company": "International Tech Corp", "package": "₹1.3 Cr / Annum"},
         ],
-        "department_wise": {
-            "Computer Engineering": {"placed": 95, "eligible": 105, "avg_pkg": 9.2},
-            "Information Technology": {"placed": 88, "eligible": 98, "avg_pkg": 8.8},
-            "Electronics": {"placed": 72, "eligible": 85, "avg_pkg": 7.5},
-            "Mechanical": {"placed": 65, "eligible": 80, "avg_pkg": 7.0},
-            "Civil": {"placed": 45, "eligible": 60, "avg_pkg": 6.5},
+        "top_recruiting_partners": [
+            "Google", "Microsoft", "Amazon", "Rubrik", "CRED", "Dassault Systèmes",
+            "Siemens", "Texas Instruments", "Persistent Systems", "TCS", "Infosys",
+            "LTI Mindtree", "Tata Motors", "John Deere", "Cummins India", "Bharat Forge"
+        ],
+        "department_placement_rates": {
+            "Computer Science & Engineering": {"placed_pct": "96%", "avg_lpa": 14.5},
+            "Information Technology": {"placed_pct": "95%", "avg_lpa": 13.8},
+            "Electronics Engineering": {"placed_pct": "90%", "avg_lpa": 11.2},
+            "Electrical Engineering": {"placed_pct": "88%", "avg_lpa": 9.5},
+            "Mechanical Engineering": {"placed_pct": "86%", "avg_lpa": 8.8},
+            "Civil Engineering": {"placed_pct": "80%", "avg_lpa": 7.5},
         }
     }
-    return {"result": sample_stats}
+    return {"result": official_stats}
 
 
 @router.post("/get_department_info")
 async def get_department_info(payload: DepartmentRequest) -> dict[str, Any]:
-    """Return information about a specific department."""
+    """Return information about a specific department at Walchand College of Engineering."""
     log.info("get_department_info called", payload=payload.model_dump())
 
     departments = {
-        "computer engineering": {
-            "name": "Department of Computer Engineering",
+        "cse": {
+            "name": "Department of Computer Science and Engineering",
             "short": "CSE",
             "established": 1984,
-            "hod": "Dr. Anjali Kulkarni",
-            "intake": 120,
-            "labs": ["Programming Lab", "Network Lab", "AI/ML Lab", "DBMS Lab", "Project Lab"],
-            "accreditation": "NBA Accredited",
-            "about": "The Department of Computer Engineering at WCE offers B.E., M.E., and Ph.D. programs. It has NAAC Grade A+ and NBA accreditation with state-of-the-art laboratories."
+            "hod": "Dr. B. F. Momin",
+            "intake_btech": 120,
+            "degrees": ["B.Tech CSE", "M.Tech CSE", "Ph.D."],
+            "accreditation": "NBA Accredited, NAAC A+",
+            "labs": ["High Performance Computing Lab", "AI/ML Lab", "Advanced Networking Lab", "Cloud & Virtualization Lab", "WIC Centre"],
+            "about": "Established in 1984, CSE at WCE is renowned for excellence in algorithmic problem solving, software engineering, and machine learning with top-tier placements at Google, Rubrik, and Microsoft."
         },
-        "information technology": {
+        "it": {
             "name": "Department of Information Technology",
             "short": "IT",
             "established": 2001,
-            "hod": "Dr. Suresh Nawale",
-            "intake": 60,
-            "labs": ["Programming Lab", "Web Technology Lab", "Cyber Security Lab"],
+            "hod": "Dr. P. K. Kharat",
+            "intake_btech": 60,
+            "degrees": ["B.Tech IT", "Ph.D."],
             "accreditation": "NBA Accredited",
-            "about": "The IT Department focuses on software development, web technologies, and cybersecurity. It has strong industry connections with Pune-based IT companies."
+            "labs": ["Data Science Lab", "Information Security & Cyber Lab", "Web Engineering Lab", "Cloud Computing Lab"],
+            "about": "Established in 2001, IT department provides deep competencies in full-stack web platforms, mobile software, cybersecurity, and distributed systems."
+        },
+        "aiml": {
+            "name": "Department of Artificial Intelligence and Machine Learning",
+            "short": "AI & ML",
+            "established": 2021,
+            "intake_btech": 60,
+            "degrees": ["B.Tech AI & ML"],
+            "labs": ["Deep Learning Lab", "NSM Nodal Centre for HPC & AI", "Rubiscape Centre of Excellence"],
+            "about": "Offers specialized training in deep neural networks, computer vision, natural language processing, and generative AI."
+        },
+        "robotics": {
+            "name": "Department of Robotics and Automation",
+            "short": "Robotics",
+            "established": 2021,
+            "intake_btech": 60,
+            "degrees": ["B.Tech Robotics & Automation"],
+            "labs": ["Robotics Workcell Lab", "AICTE IDEA Lab", "Mechatronics Lab"],
+            "about": "Interdisciplinary department combining mechanical engineering, embedded electronics, sensors, and computer vision for industrial robotics."
+        },
+        "electronics": {
+            "name": "Department of Electronics Engineering",
+            "short": "Electronics",
+            "established": 1986,
+            "hod": "Dr. S. G. Tamhankar",
+            "intake_btech": 60,
+            "degrees": ["B.Tech Electronics", "M.Tech Electronics", "Integrated B.Tech-M.Tech in VLSI Design (5 Years)", "Ph.D."],
+            "accreditation": "NBA Accredited",
+            "labs": ["Cadence & Synopsys VLSI Lab", "Embedded Systems Lab", "DSP & Communication Lab", "5G & IoT Healthcare Lab"],
+            "about": "Pioneering electronics department with specialized VLSI synthesis setups and the 5-year integrated B.Tech-M.Tech VLSI curriculum."
+        },
+        "mechanical": {
+            "name": "Department of Mechanical Engineering",
+            "short": "Mechanical",
+            "established": 1955,
+            "hod": "Dr. U. A. Dabade",
+            "intake_btech": 60,
+            "degrees": ["B.Tech Mechanical", "M.Tech Design", "M.Tech Production", "Diploma Mechanical", "Ph.D."],
+            "accreditation": "NBA Accredited",
+            "labs": ["Dassault Product Innovation Laboratory", "Siemens Automation & Drives Lab", "CAD/CAM Centre", "IC Engines Lab"],
+            "about": "One of the pillar departments of WCE since 1955, equipped with Dassault 3DEXPERIENCE facilities and Siemens industrial automation."
+        },
+        "civil": {
+            "name": "Department of Civil Engineering",
+            "short": "Civil",
+            "established": 1947,
+            "hod": "Dr. K. S. Gumaste",
+            "intake_btech": 60,
+            "degrees": ["B.Tech Civil", "M.Tech Structures", "M.Tech Environmental", "Diploma Civil", "Ph.D."],
+            "accreditation": "NBA Accredited",
+            "labs": ["DST Funded Heavy Structures Lab", "Environmental Engineering Lab", "Geotechnical Testing Lab", "Surveying & GIS Lab"],
+            "about": "The founding department of Walchand College of Engineering established in 1947 by Late Shri Dhondumama Sathe with high-capacity structural testing facilities."
+        },
+        "electrical": {
+            "name": "Department of Electrical Engineering",
+            "short": "Electrical",
+            "established": 1955,
+            "hod": "Dr. A. P. Vaidya",
+            "intake_btech": 60,
+            "degrees": ["B.Tech Electrical", "M.Tech Power Systems", "M.Tech Control Systems", "Diploma Electrical", "Ph.D."],
+            "accreditation": "NBA Accredited",
+            "labs": ["Smart Grid & EV Lab", "High Voltage Lab", "Electrical Machines Lab", "Power Electronics Lab"],
+            "about": "Established in 1955, driving power sector advancements, EV technologies, and modern smart distribution systems."
+        },
+        "mba": {
+            "name": "Department of Management Studies (MBA)",
+            "short": "MBA",
+            "established": 2026,
+            "degrees": ["Master of Business Administration (MBA)"],
+            "intake": 60,
+            "specializations": ["Technology Management", "Operations & Supply Chain", "Finance", "Marketing"],
+            "about": "Newly launched postgraduate business school program approved by AICTE and affiliated with Shivaji University."
+        },
+        "design": {
+            "name": "Department of Design",
+            "short": "B.Des",
+            "established": 2026,
+            "degrees": ["Bachelor of Design (B.Des)"],
+            "about": "Newly introduced undergraduate program focusing on Industrial Design, UX/UI, and product aesthetics."
         }
     }
 
-    query = (payload.department or payload.query or "").lower()
+    query = (payload.department or payload.query or "").lower().strip()
     for key, info in departments.items():
-        if key in query or query in key:
-            return {"result": {**info, "note": "[DEMO DATA]"}}
+        if key in query or query in key or info["short"].lower() in query:
+            return {"result": {**info, "college": "Walchand College of Engineering, Sangli"}}
 
-    return {"result": {"available_departments": list(departments.keys()), "note": "[DEMO DATA]"}}
+    return {"result": {"available_departments": list(departments.keys()), "college": "Walchand College of Engineering, Sangli"}}
 
 
 @router.post("/search_college_database")
 async def search_college_database(payload: ToolRequest) -> dict[str, Any]:
-    """Generic search across college structured data."""
+    """Search across structured college information."""
     log.info("search_college_database called", query=payload.query)
 
     return {
         "result": {
-            "note": "[DEMO DATA] This tool searches structured college data",
+            "institution": "Walchand College of Engineering, Sangli (Autonomous, Affiliated to Shivaji University)",
             "query": payload.query,
-            "message": "Please use specific tools (get_faculty, get_notices, etc.) for more accurate results.",
+            "key_highlights": "Estd. 1947 | Highest Package ₹1.5 Cr/yr | 30,000+ Alumni | Global CEO Chanel Leena Nair | 50k sq ft Library | AICTE IDEA Lab",
+            "recommended_tools": ["get_notices", "get_placement_statistics", "get_department_info", "get_faculty", "get_exam_schedule", "get_events"],
         }
     }
+

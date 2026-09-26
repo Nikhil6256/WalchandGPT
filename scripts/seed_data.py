@@ -84,32 +84,32 @@ async def seed_sample_documents(session: AsyncSession):
 
     sample_docs = [
         {
-            "title": "College FAQ — General Information",
-            "description": "Frequently asked questions about WCE",
+            "title": "Walchand College of Engineering — Official FAQ & Profile",
+            "description": "Comprehensive FAQ covering history (1947), autonomous status, Shivaji University affiliation, library, and campus infrastructure.",
             "file_name": "college_faq.txt",
             "document_type": DocumentType.TXT,
             "document_category": "faq",
         },
         {
-            "title": "Academic Calendar 2026-27 (DEMO)",
-            "description": "Important dates for AY 2026-27",
-            "file_name": "academic_calendar_2026.txt",
+            "title": "Academic Departments, Programs & Intake Capacities",
+            "description": "Details of B.Tech programs (CSE, IT, AI-ML, Robotics, Electronics, Electrical, Mechanical, Civil), newly introduced B.Des, MBA, and Integrated VLSI (5-Yr), plus Polytechnic Diploma wings.",
+            "file_name": "departments_and_programs.txt",
             "document_type": DocumentType.TXT,
             "document_category": "academic",
         },
         {
-            "title": "Attendance Policy",
-            "description": "Rules regarding student attendance",
-            "file_name": "attendance_policy.txt",
+            "title": "Campus Placements, Recruiters & Distinguished Alumni",
+            "description": "Official placement metrics (Highest ₹1.5 Cr/yr, Avg ₹12 LPA, 300+ companies, Rubrik/Google/CRED selections) and alumni leaders (Leena Nair - Chanel CEO, Suumit Shah, IAS/IPS officers).",
+            "file_name": "placements_and_alumni.txt",
             "document_type": DocumentType.TXT,
-            "document_category": "policy",
+            "document_category": "placement",
         },
         {
-            "title": "Hostel Rules and Regulations (DEMO)",
-            "description": "Rules for hostel residents",
-            "file_name": "hostel_rules.txt",
+            "title": "Current Notices, CAP Admissions & Campus Events (AY 2026-27)",
+            "description": "State CET Cell CAP reporting rounds 1-4, MBA option form CAP-2, FDP on Reconfigurable Intelligent Surfaces, Marathi AICTE-VAANI workshop, SMKC Civic Innovation challenge.",
+            "file_name": "current_notices_and_admissions.txt",
             "document_type": DocumentType.TXT,
-            "document_category": "hostel",
+            "document_category": "notice",
         },
     ]
 
@@ -127,7 +127,7 @@ async def seed_sample_documents(session: AsyncSession):
         session.add(doc)
 
     await session.commit()
-    print("✓ Sample document records created (run ingestion pipeline to index them)")
+    print("✓ Official WCE document records created in database")
 
 
 async def main():

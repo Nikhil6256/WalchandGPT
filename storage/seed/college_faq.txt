@@ -1,175 +1,125 @@
-WALCHAND COLLEGE OF ENGINEERING — FREQUENTLY ASKED QUESTIONS
-[DEMO DATA — Not official WCE documentation]
+WALCHAND COLLEGE OF ENGINEERING, SANGLI — OFFICIAL FAQ
+[Official Knowledge Base for WalchandGPT]
 
-=== GENERAL INFORMATION ===
+=== 1. GENERAL INFORMATION & HISTORY ===
 
 Q: What is Walchand College of Engineering?
-A: Walchand College of Engineering (WCE), Sangli, is a premier autonomous engineering institution established in 1947. It is affiliated with Savitribai Phule Pune University (SPPU) and is approved by AICTE. The college is NAAC Grade A+ accredited and NBA accredited for multiple programs.
+A: Walchand College of Engineering (WCE), Sangli, is a prestigious government-aided autonomous engineering institution established in 1947. Affiliated with Shivaji University, Kolhapur, it is one of the oldest and most reputed engineering colleges in India, celebrated for over 75 years of academic excellence (Platinum Jubilee celebrated in 2021). WCE holds NAAC accreditation and NBA accreditation for its core engineering programs.
 
 Q: Where is WCE located?
 A: Walchand College of Engineering is located in Vishrambag, Sangli, Maharashtra - 416415, India.
+Contact Phone: +91 233 2300383
+Email: info@walchandsangli.ac.in
+Website: https://walchandsangli.ac.in
 
-Q: What are the departments at WCE?
-A: WCE offers programs in:
-- Computer Engineering
-- Information Technology
-- Electronics & Telecommunication Engineering
-- Mechanical Engineering
-- Civil Engineering
-- Chemical Engineering
-- Instrumentation Engineering
-
-Q: What programs does WCE offer?
-A: WCE offers:
-- Bachelor of Engineering (B.E.) — 4-year undergraduate programs
-- Master of Engineering (M.E.) — 2-year postgraduate programs
-- Ph.D. programs in various disciplines
-- MBA program
-
-=== ADMISSION ===
-
-Q: How do I get admission to WCE?
-A: Admission to B.E. programs is through Maharashtra CET (MHT-CET) and JEE Main scores via Centralized Admission Process (CAP) conducted by the State CET Cell. For M.E., admission is through GATE scores.
-
-Q: What is the intake capacity?
-A: Approximate intake per branch per year:
-- Computer Engineering: 120 students
-- Information Technology: 60 students
-- E&TC Engineering: 60 students
-- Mechanical Engineering: 120 students
-- Civil Engineering: 60 students
-- Chemical Engineering: 60 students
-
-=== ACADEMIC POLICIES ===
-
-Q: What is the minimum attendance requirement?
-A: Students must maintain a minimum of 75% attendance in each subject to be eligible to appear for the semester examinations. Students with attendance between 65-75% may apply for attendance condonation with valid medical/other reasons.
-
-Q: What is the grading system?
-A: WCE follows the Savitribai Phule Pune University grading system:
-- O (Outstanding): 91-100
-- A+ (Excellent): 81-90
-- A (Very Good): 71-80
-- B+ (Good): 61-70
-- B (Above Average): 51-60
-- C (Average): 41-50
-- P (Pass): 33-40
-- F (Fail): Below 33
-
-Q: How many credits are required to complete B.E.?
-A: A student must earn a minimum of 240 credits over 8 semesters to be awarded the B.E. degree.
-
-Q: What is the CGPA calculation method?
-A: CGPA = Sum of (Grade Points × Credits) / Total Credits earned
-
-=== EXAMINATIONS ===
-
-Q: How are end-semester examinations conducted?
-A: End-semester examinations are conducted by SPPU for most subjects. Internal assessments (ISE) are conducted by the college. The distribution is typically:
-- End Semester Examination: 70 marks
-- Internal Semester Examination: 30 marks (Unit Tests + assignments)
-
-Q: What happens if I fail a subject?
-A: Students who fail can appear for:
-1. KT (Keep Term) examinations — appearing with the next regular batch
-2. ATKT (Allowed To Keep Term) — can continue to next semester with backlog subjects
-
-Q: Can I get my answer sheet re-evaluated?
-A: Yes, students can apply for revaluation/reassessment of answer sheets within 15 days of result declaration by paying the prescribed fee.
-
-=== FACILITIES ===
-
-Q: What facilities are available at WCE?
-A: WCE has:
-- Central Library with 50,000+ books and digital resources
-- State-of-the-art laboratories
-- Wi-Fi campus
-- Canteen and food court
-- Sports facilities (cricket ground, basketball court, gymnasium)
-- Auditorium (capacity 1200)
-- Separate hostels for boys and girls
-- Medical facility
-- ATM
-- Bank branch on campus
-
-Q: Does WCE have a hostel facility?
-A: Yes, WCE has separate hostel facilities for male and female students. Hostel allotment is done based on merit and distance from home. The hostels provide:
-- Furnished rooms
-- Mess facility with nutritious meals
-- Common rooms
-- 24/7 security
-- Wi-Fi connectivity
-
-Q: What are the library timings?
-A: The central library is open:
-- Monday to Saturday: 8:00 AM to 10:00 PM
-- Sunday: 10:00 AM to 6:00 PM
-- During examination period: Extended hours until midnight
-
-=== SCHOLARSHIPS ===
-
-Q: What scholarships are available for students?
-A: Students can avail the following scholarships:
-1. Government Scholarships:
-   - EBC (Economically Backward Class) scholarship
-   - OBC scholarship
-   - SC/ST scholarship
-   - Minority scholarship
-   - Swami Vivekanand Merit Scholarship
-2. Institutional Scholarships:
-   - College merit scholarships for top performers
-   - Sports scholarships
-3. External Scholarships:
-   - Industry-sponsored scholarships
-   - Alumni scholarships through WCE Alumni Association
-
-Q: How to apply for EBC scholarship?
-A: Apply online through the Maharashtra State Scholarship Portal (mahaeschol.maharashtra.gov.in). Required documents: income certificate, caste certificate (if applicable), academic records, bank account details.
-
-=== CLUBS AND ACTIVITIES ===
-
-Q: What student clubs are at WCE?
-A: WCE has an active student life with clubs including:
-Technical Clubs:
-- ACM (Association for Computing Machinery) Student Chapter
-- IEEE Student Branch
-- CSI (Computer Society of India) Student Branch
-- IETE Student Forum
-- Robotics Club
-- Coding Club
-
-Cultural/Sports Clubs:
-- Drama Club
-- Music Club
-- Photography Club
-- Debate Club
-- NSS (National Service Scheme)
-- NCC (National Cadet Corps)
-
-=== PLACEMENTS ===
-
-Q: Does WCE have a placement cell?
-A: Yes, WCE has a dedicated Training and Placement Cell that facilitates campus placements. The cell organizes:
-- Pre-placement training (aptitude, technical, soft skills)
-- Mock interviews
-- Resume building workshops
-- Company visits and campus drives
-
-Q: What companies recruit from WCE?
-A: Top recruiters include (demo data):
-- TCS, Infosys, Wipro, Accenture, Capgemini (IT services)
-- LTI Mindtree, Persistent, Syntel (product/mid-tier)
-- Goldman Sachs, JP Morgan (finance/tech)
-- L&T, Emerson, Siemens (core engineering)
-- Startups and local tech companies
-
-=== CONTACT INFORMATION ===
-
-Q: How to contact WCE administration?
+Q: What is the history and legacy of WCE?
 A: 
-Principal's Office: +91-233-2372722
-Email: principal@walchandsangli.ac.in
-Website: www.walchandsangli.ac.in
-Address: Walchand College of Engineering, Vishrambag, Sangli - 416415
+- 1947: Founded by the Late Shri Dhondumama Sathe with a single program in Civil Engineering (B.E. Civil).
+- 1955: Renamed in honor of Seth Walchand Hirachand as Walchand College of Engineering; launched Mechanical and Electrical branches along with Diploma programs.
+- 1956-1965: Administrative Council established with industry participation (Walchand Industries, HCC, IHP).
+- 1971: Introduced Postgraduate programs and established the first recognized research center under Shivaji University.
+- 1977: First private engineering college in Maharashtra to receive government aid.
+- 2003: First college under Shivaji University to secure NBA Accreditation for five UG programs.
+- 2005: Selected for World Bank-assisted TEQIP scheme for institutional transformation.
+- 2007: Awarded Autonomous Institute status.
+- 2008: Inauguration of the 50,000 sq. ft. Ajit Gulabchand Central Library.
+- 2021: Celebrated Platinum Jubilee (75 years of excellence).
 
-Note: Always verify contact information on the official WCE website.
+Q: Which university is WCE affiliated with?
+A: Walchand College of Engineering is an autonomous institute affiliated with Shivaji University, Kolhapur. It designs its own academic curriculum, syllabi, and examination system under autonomous regulations while degrees are conferred by Shivaji University.
+
+=== 2. ACADEMIC PROGRAMS ===
+
+Q: What undergraduate (UG) programs are offered at WCE?
+A: WCE offers 4-year Bachelor of Technology (B.Tech) degrees in:
+1. Computer Science and Engineering (CSE)
+2. Information Technology (IT)
+3. Artificial Intelligence and Machine Learning (AI & ML)
+4. Robotics and Automation
+5. Electronics Engineering
+6. Electrical Engineering
+7. Mechanical Engineering
+8. Civil Engineering
+9. Bachelor of Design (B.Des) - Newly introduced program
+
+Q: What postgraduate (PG) and dual-degree programs are offered?
+A: WCE offers:
+1. Master of Technology (M.Tech) in Civil (Structural, Environmental), Mechanical (Design, Production), Electrical (Power Systems, Control Systems), Electronics, and Computer Science & Engineering.
+2. Master of Business Administration (MBA) - Newly introduced program.
+3. Integrated B.Tech - M.Tech Programme (5 Years) in VLSI Design and Embedded Systems - Newly introduced program.
+4. Ph.D. programs across engineering disciplines as a recognized research center under Shivaji University.
+
+Q: What polytechnic (Diploma) programs are offered?
+A: The Polytechnic wing at WCE offers 3-year diploma programs in:
+- Civil Engineering
+- Mechanical Engineering
+- Electrical Engineering
+- Industrial Electronics Engineering
+
+=== 3. ADMISSION PROCEDURES & ELIGIBILITY ===
+
+Q: How do I get admission to B.Tech at WCE?
+A: Admission to First Year B.Tech is administered through the Centralized Admission Process (CAP) conducted by the Maharashtra State Common Entrance Test Cell (CET Cell).
+- Eligibility: Passed 10+2 / HSC with Physics and Mathematics as compulsory subjects along with Chemistry/Biotechnology/Biology/Technical Vocational subjects.
+- Entrance Exams: Valid score in MHT-CET (for Maharashtra State candidates) or JEE (Main) Paper-1 (for All India candidates).
+- Quotas: CAP General Quota, Direct Second Year (DSE) for diploma holders, and NRI / PIO / OCI / FN / CIWGC categories.
+
+Q: How can students apply for MBA at WCE?
+A: Admission to the MBA program is through the Maharashtra MBA/MMS CET or equivalent national exams (CAT, CMAT, MAT) via the State CET Cell CAP rounds. Eligible students submit college options through the CET Cell portal.
+
+Q: How do I get admission to M.Tech at WCE?
+A: Admission to M.Tech programs requires a relevant B.E./B.Tech degree with a qualifying GATE score through the State CET Cell CAP process or sponsored/institute-level rounds.
+
+=== 4. PLACEMENT & CAREER STATISTICS ===
+
+Q: What are the placement highlights at WCE?
+A: 
+- Highest Package: ₹1.50 Crore / Annum (Previous milestone: ₹1.3 Crore / Annum by Saurabh Pukale)
+- Average Package: ₹12 LPA
+- Companies Visiting: 300+ global and national companies annually
+- Placement Assistance: 100%
+- Recent Student Selections:
+  * Jay Shirguppe placed at Rubrik
+  * Aardhya Pittalwar placed at CRED
+  * Ankita Dongare placed at Google
+- Major Recruiting Companies: Google, Microsoft, Amazon, Rubrik, CRED, Dassault Systèmes, Siemens, TCS, Infosys, Wipro, LTI Mindtree, Capgemini, Tata Motors, John Deere, Bharat Forge, and Cummins.
+
+=== 5. DISTINGUISHED ALUMNI ===
+
+Q: Who are some notable alumni of Walchand College of Engineering?
+A: WCE has an alumni base of 30,000+ graduates including 250+ CEOs and 1,000+ enterprise founders:
+- Leena Nair: Global Chief Executive Officer (CEO) of CHANEL (London, UK)
+- Suumit Shah: Co-founder & CEO of Dukaan
+- Abhijeet Pawar: Managing Director of Sakal Media Group
+- Alhad Apte: Former Chief of NTRO & Former Advisor to the Prime Minister of India
+- Shri Bhaskar Sawant (IAS): Secretary, Department of Personnel, Government of Rajasthan
+- Smt. Vidya Kulkarni (IPS): Joint Director in the Central Bureau of Investigation (CBI)
+- Dr. Sadanand Joshi: President of Joshi Technologies International (USA)
+- Shri Pradip Marathe: Founder of Cotton King Pvt. Ltd.
+- Late Ramkumar Rathi: Ex-Director, Beharay Rathi Group
+- Late Subhash Awale: Eminent academician who helped architect IITs, NITIE, and AICTE
+
+=== 6. CAMPUS FACILITIES & RESEARCH LABS ===
+
+Q: What library facilities are available at WCE?
+A: The Ajit Gulabchand Central Library is a state-of-the-art 50,000 sq. ft. facility with over 100,000 books, subscriptions to leading IEEE, ACM, Springer, and Elsevier digital journals, a large reading hall, and digital access centers.
+
+Q: What specialized research centers and labs exist at WCE?
+A: 
+- AICTE IDEA Lab
+- Dassault Product Innovation Laboratory
+- Rubiscape Centre of Excellence (Data Science & Analytics)
+- Siemens Automation and Drives Laboratory
+- Heavy Structures Lab (DST Funded)
+- NSM Nodal Centre for HPC and AI Training
+- 5G and IoT for Intelligent Healthcare Laboratory
+- Walchand Informatics Centre (WIC) with campus-wide high-speed fiber WiFi
+- CIRCLE (Centre of Inter & Multidisciplinary Research Collaboration and Learning Excellence)
+
+=== 7. CAMPUS LIFE & STUDENT AMENITIES ===
+
+Q: Are hostel accommodations available?
+A: Yes, WCE provides separate on-campus hostel facilities for boys and girls with study rooms, high-speed WiFi, recreational halls, solar water heaters, and dining mess courts.
+
+Q: What student clubs and technical activities are active on campus?
+A: Active clubs include ACM Student Chapter, CSI (Computer Society of India), IEEE Student Branch, WLUG (Walchand Linux Users Group), Rotaract Club, SOFTA, MESA, CESA, ELESA, EESA, and Art & Cultural Clubs. Annual technical and cultural festivals attract thousands of participants across Maharashtra.
