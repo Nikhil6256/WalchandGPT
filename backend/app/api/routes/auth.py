@@ -36,15 +36,18 @@ async def register(payload: RegisterRequest, request: Request, db: DBDep):
         year=payload.year,
     )
 
-    # Audit log
-    db.add(AuditLog(
-        user_id=user.id,
-        action="register",
-        resource_type="user",
-        resource_id=str(user.id),
-        ip_address=request.client.host if request.client else None,
-    ))
-    await db.commit()
+    # Audit log (resilient if DB is offline)
+    try:
+        db.add(AuditLog(
+            user_id=user.id,
+            action="register",
+            resource_type="user",
+            resource_id=str(user.id),
+            ip_address=request.client.host if request.client else None,
+        ))
+        await db.commit()
+    except Exception as e:
+        log.warning("Audit log write deferred", error=str(e))
 
     access_token = create_access_token(
         subject=str(user.id),
@@ -66,24 +69,29 @@ async def login(payload: LoginRequest, request: Request, db: DBDep):
     user = await user_service.authenticate(payload.email, payload.password)
 
     if not user:
-        # Audit failed login attempt
-        db.add(AuditLog(
-            action="login_failed",
-            details={"email": payload.email},
-            ip_address=request.client.host if request.client else None,
-        ))
-        await db.commit()
+        try:
+            db.add(AuditLog(
+                action="login_failed",
+                details={"email": payload.email},
+                ip_address=request.client.host if request.client else None,
+            ))
+            await db.commit()
+        except Exception:
+            pass
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password",
         )
 
-    db.add(AuditLog(
-        user_id=user.id,
-        action="login_success",
-        ip_address=request.client.host if request.client else None,
-    ))
-    await db.commit()
+    try:
+        db.add(AuditLog(
+            user_id=user.id,
+            action="login_success",
+            ip_address=request.client.host if request.client else None,
+        ))
+        await db.commit()
+    except Exception as e:
+        log.warning("Audit log write deferred", error=str(e))
 
     access_token = create_access_token(
         subject=str(user.id),

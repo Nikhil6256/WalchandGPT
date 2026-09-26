@@ -66,14 +66,18 @@ async def stream_chat(
 
     # Save user message
     user_msg = Message(
+        id=uuid.uuid4(),
         conversation_id=conversation.id,
         role=MessageRole.USER,
         content=payload.message,
         message_type=MessageType.TEXT,
     )
-    db.add(user_msg)
-    await db.commit()
-    await db.refresh(user_msg)
+    try:
+        db.add(user_msg)
+        await db.commit()
+        await db.refresh(user_msg)
+    except Exception as e:
+        log.warning("User message DB persistence deferred", error=str(e))
 
     # Build retriever and agent graph (per-request, uses request-scoped DB session)
     retriever = HybridRetriever(db)
@@ -128,6 +132,7 @@ async def stream_chat(
                     # Persist assistant message
                     answer = final_state.get("answer", "".join(accumulated_answer))
                     assistant_msg = Message(
+                        id=uuid.uuid4(),
                         conversation_id=conversation.id,
                         role=MessageRole.ASSISTANT,
                         content=answer,
@@ -141,9 +146,12 @@ async def stream_chat(
                             "total_latency_ms": total_latency,
                         },
                     )
-                    db.add(assistant_msg)
-                    await db.commit()
-                    await db.refresh(assistant_msg)
+                    try:
+                        db.add(assistant_msg)
+                        await db.commit()
+                        await db.refresh(assistant_msg)
+                    except Exception as e:
+                        log.warning("Assistant message DB persistence deferred", error=str(e))
 
                     yield _sse_event("done", {
                         "message_id": str(assistant_msg.id),

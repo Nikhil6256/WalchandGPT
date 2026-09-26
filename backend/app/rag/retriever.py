@@ -66,6 +66,9 @@ class HybridRetriever:
             [vector_results, keyword_results], k=k
         )
 
+        if not merged:
+            merged = self._file_fallback_search(query, k=k)
+
         elapsed = (time.perf_counter() - t0) * 1000
         log.info(
             "Retrieval complete",
@@ -76,6 +79,48 @@ class HybridRetriever:
         )
 
         return merged[:k]
+
+    def _file_fallback_search(self, query: str, k: int = 5) -> list[Document]:
+        """Search local seed files directly when database is offline."""
+        from pathlib import Path
+        import re
+
+        seed_dir = Path("./storage/seed")
+        if not seed_dir.exists():
+            seed_dir = Path("/home/nikhil/code/WalchandGPT/storage/seed")
+        if not seed_dir.exists():
+            return []
+
+        query_words = set(re.findall(r"\w+", query.lower()))
+        # Remove common stop words
+        stop_words = {"what", "is", "the", "at", "in", "of", "and", "a", "an", "to", "for", "are", "tell", "me", "about"}
+        significant_words = query_words - stop_words
+        if not significant_words:
+            significant_words = query_words
+
+        matches = []
+        for fpath in seed_dir.glob("*.txt"):
+            try:
+                text_content = fpath.read_text(encoding="utf-8")
+                sections = [s.strip() for s in text_content.split("\n\n") if s.strip()]
+                for s in sections:
+                    s_words = set(re.findall(r"\w+", s.lower()))
+                    overlap = len(significant_words.intersection(s_words))
+                    if overlap > 0:
+                        matches.append((overlap, Document(
+                            page_content=s,
+                            metadata={
+                                "title": fpath.stem.replace("_", " ").title(),
+                                "source": fpath.name,
+                                "score": float(overlap),
+                                "retrieval_method": "seed_document_search"
+                            }
+                        )))
+            except Exception:
+                continue
+
+        matches.sort(key=lambda x: x[0], reverse=True)
+        return [doc for _, doc in matches[:k]]
 
     async def _vector_search(
         self,
@@ -115,10 +160,14 @@ class HybridRetriever:
             LIMIT :k
         """)
 
-        result = await self.db.execute(
-            sql, {"threshold": settings.SIMILARITY_THRESHOLD, "k": k}
-        )
-        rows = result.fetchall()
+        try:
+            result = await self.db.execute(
+                sql, {"threshold": settings.SIMILARITY_THRESHOLD, "k": k}
+            )
+            rows = result.fetchall()
+        except Exception as e:
+            log.warning("Vector search query failed or DB offline", error=str(e))
+            return []
 
         return [
             Document(

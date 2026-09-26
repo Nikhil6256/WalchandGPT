@@ -28,7 +28,10 @@ async def lifespan(app: FastAPI):
     log.info("WalchandGPT starting up", environment=settings.APP_ENV)
 
     # Initialize database tables (idempotent; use Alembic for migrations)
-    await init_db()
+    try:
+        await init_db()
+    except Exception as e:
+        log.warning("Database initialization deferred: PostgreSQL not reachable yet", error=str(e))
 
     # Initialize MCP connection pool
     from app.agents.mcp_client import mcp_client
