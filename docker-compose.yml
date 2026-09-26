@@ -1,0 +1,116 @@
+services:
+  # ── PostgreSQL with pgvector ──────────────────────────────────
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: walchandgpt-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-walchand}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-walchand_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-walchandgpt}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-walchand} -d ${POSTGRES_DB:-walchandgpt}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - walchandgpt-net
+
+  # ── Redis ─────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: walchandgpt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - walchandgpt-net
+
+  # ── Backend (FastAPI) ─────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: walchandgpt-backend
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
+      - SYNC_DATABASE_URL=postgresql://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
+      - REDIS_URL=redis://redis:6379/0
+      - MCP_SERVER_URL=http://mcp-server:8001
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./storage:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - walchandgpt-net
+
+  # ── MCP Server ────────────────────────────────────────────────
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    container_name: walchandgpt-mcp
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
+    env_file:
+      - .env
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./mcp-server:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - walchandgpt-net
+
+  # ── Frontend (Next.js) ────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: walchandgpt-frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_APP_NAME=WalchandGPT
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - walchandgpt-net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  walchandgpt-net:
+    driver: bridge

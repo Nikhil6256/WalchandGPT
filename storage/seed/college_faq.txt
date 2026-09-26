@@ -1,0 +1,175 @@
+WALCHAND COLLEGE OF ENGINEERING — FREQUENTLY ASKED QUESTIONS
+[DEMO DATA — Not official WCE documentation]
+
+=== GENERAL INFORMATION ===
+
+Q: What is Walchand College of Engineering?
+A: Walchand College of Engineering (WCE), Sangli, is a premier autonomous engineering institution established in 1947. It is affiliated with Savitribai Phule Pune University (SPPU) and is approved by AICTE. The college is NAAC Grade A+ accredited and NBA accredited for multiple programs.
+
+Q: Where is WCE located?
+A: Walchand College of Engineering is located in Vishrambag, Sangli, Maharashtra - 416415, India.
+
+Q: What are the departments at WCE?
+A: WCE offers programs in:
+- Computer Engineering
+- Information Technology
+- Electronics & Telecommunication Engineering
+- Mechanical Engineering
+- Civil Engineering
+- Chemical Engineering
+- Instrumentation Engineering
+
+Q: What programs does WCE offer?
+A: WCE offers:
+- Bachelor of Engineering (B.E.) — 4-year undergraduate programs
+- Master of Engineering (M.E.) — 2-year postgraduate programs
+- Ph.D. programs in various disciplines
+- MBA program
+
+=== ADMISSION ===
+
+Q: How do I get admission to WCE?
+A: Admission to B.E. programs is through Maharashtra CET (MHT-CET) and JEE Main scores via Centralized Admission Process (CAP) conducted by the State CET Cell. For M.E., admission is through GATE scores.
+
+Q: What is the intake capacity?
+A: Approximate intake per branch per year:
+- Computer Engineering: 120 students
+- Information Technology: 60 students
+- E&TC Engineering: 60 students
+- Mechanical Engineering: 120 students
+- Civil Engineering: 60 students
+- Chemical Engineering: 60 students
+
+=== ACADEMIC POLICIES ===
+
+Q: What is the minimum attendance requirement?
+A: Students must maintain a minimum of 75% attendance in each subject to be eligible to appear for the semester examinations. Students with attendance between 65-75% may apply for attendance condonation with valid medical/other reasons.
+
+Q: What is the grading system?
+A: WCE follows the Savitribai Phule Pune University grading system:
+- O (Outstanding): 91-100
+- A+ (Excellent): 81-90
+- A (Very Good): 71-80
+- B+ (Good): 61-70
+- B (Above Average): 51-60
+- C (Average): 41-50
+- P (Pass): 33-40
+- F (Fail): Below 33
+
+Q: How many credits are required to complete B.E.?
+A: A student must earn a minimum of 240 credits over 8 semesters to be awarded the B.E. degree.
+
+Q: What is the CGPA calculation method?
+A: CGPA = Sum of (Grade Points × Credits) / Total Credits earned
+
+=== EXAMINATIONS ===
+
+Q: How are end-semester examinations conducted?
+A: End-semester examinations are conducted by SPPU for most subjects. Internal assessments (ISE) are conducted by the college. The distribution is typically:
+- End Semester Examination: 70 marks
+- Internal Semester Examination: 30 marks (Unit Tests + assignments)
+
+Q: What happens if I fail a subject?
+A: Students who fail can appear for:
+1. KT (Keep Term) examinations — appearing with the next regular batch
+2. ATKT (Allowed To Keep Term) — can continue to next semester with backlog subjects
+
+Q: Can I get my answer sheet re-evaluated?
+A: Yes, students can apply for revaluation/reassessment of answer sheets within 15 days of result declaration by paying the prescribed fee.
+
+=== FACILITIES ===
+
+Q: What facilities are available at WCE?
+A: WCE has:
+- Central Library with 50,000+ books and digital resources
+- State-of-the-art laboratories
+- Wi-Fi campus
+- Canteen and food court
+- Sports facilities (cricket ground, basketball court, gymnasium)
+- Auditorium (capacity 1200)
+- Separate hostels for boys and girls
+- Medical facility
+- ATM
+- Bank branch on campus
+
+Q: Does WCE have a hostel facility?
+A: Yes, WCE has separate hostel facilities for male and female students. Hostel allotment is done based on merit and distance from home. The hostels provide:
+- Furnished rooms
+- Mess facility with nutritious meals
+- Common rooms
+- 24/7 security
+- Wi-Fi connectivity
+
+Q: What are the library timings?
+A: The central library is open:
+- Monday to Saturday: 8:00 AM to 10:00 PM
+- Sunday: 10:00 AM to 6:00 PM
+- During examination period: Extended hours until midnight
+
+=== SCHOLARSHIPS ===
+
+Q: What scholarships are available for students?
+A: Students can avail the following scholarships:
+1. Government Scholarships:
+   - EBC (Economically Backward Class) scholarship
+   - OBC scholarship
+   - SC/ST scholarship
+   - Minority scholarship
+   - Swami Vivekanand Merit Scholarship
+2. Institutional Scholarships:
+   - College merit scholarships for top performers
+   - Sports scholarships
+3. External Scholarships:
+   - Industry-sponsored scholarships
+   - Alumni scholarships through WCE Alumni Association
+
+Q: How to apply for EBC scholarship?
+A: Apply online through the Maharashtra State Scholarship Portal (mahaeschol.maharashtra.gov.in). Required documents: income certificate, caste certificate (if applicable), academic records, bank account details.
+
+=== CLUBS AND ACTIVITIES ===
+
+Q: What student clubs are at WCE?
+A: WCE has an active student life with clubs including:
+Technical Clubs:
+- ACM (Association for Computing Machinery) Student Chapter
+- IEEE Student Branch
+- CSI (Computer Society of India) Student Branch
+- IETE Student Forum
+- Robotics Club
+- Coding Club
+
+Cultural/Sports Clubs:
+- Drama Club
+- Music Club
+- Photography Club
+- Debate Club
+- NSS (National Service Scheme)
+- NCC (National Cadet Corps)
+
+=== PLACEMENTS ===
+
+Q: Does WCE have a placement cell?
+A: Yes, WCE has a dedicated Training and Placement Cell that facilitates campus placements. The cell organizes:
+- Pre-placement training (aptitude, technical, soft skills)
+- Mock interviews
+- Resume building workshops
+- Company visits and campus drives
+
+Q: What companies recruit from WCE?
+A: Top recruiters include (demo data):
+- TCS, Infosys, Wipro, Accenture, Capgemini (IT services)
+- LTI Mindtree, Persistent, Syntel (product/mid-tier)
+- Goldman Sachs, JP Morgan (finance/tech)
+- L&T, Emerson, Siemens (core engineering)
+- Startups and local tech companies
+
+=== CONTACT INFORMATION ===
+
+Q: How to contact WCE administration?
+A: 
+Principal's Office: +91-233-2372722
+Email: principal@walchandsangli.ac.in
+Website: www.walchandsangli.ac.in
+Address: Walchand College of Engineering, Vishrambag, Sangli - 416415
+
+Note: Always verify contact information on the official WCE website.
