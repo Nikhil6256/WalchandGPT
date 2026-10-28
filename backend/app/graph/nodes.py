@@ -4,6 +4,7 @@ Each node is a pure async function: AgentState -> partial AgentState dict.
 Nodes do NOT import each other — they communicate only through state.
 """
 import time
+import re
 from typing import Any
 
 import structlog
@@ -12,7 +13,6 @@ from langchain_core.output_parsers import StrOutputParser
 
 from app.graph.state import AgentState, Citation
 from app.llm.prompts import (
-    CLASSIFIER_PROMPT,
     DIRECT_ANSWER_PROMPT,
     GRADER_PROMPT,
     RAG_PROMPT,
@@ -36,22 +36,32 @@ async def classify_query(state: AgentState) -> dict:
     Node: Classify the user's intent to route the graph correctly.
     Uses a fast, cheap LLM call (low temperature for determinism).
     """
-    log.info("classify_query", query=state["query"][:100])
-    llm = get_llm(temperature=0.0)
-    chain = CLASSIFIER_PROMPT | llm | StrOutputParser()
-
-    try:
-        intent = (await chain.ainvoke({"question": state["query"]})).strip().lower()
-        # Sanitize — fall back to knowledge_base_question if unknown
-        valid_intents = {
-            "general_question", "knowledge_base_question", "timetable_query",
-            "notice_query", "faculty_query", "exam_query", "event_query", "placement_query"
-        }
-        if intent not in valid_intents:
-            intent = "knowledge_base_question"
-    except Exception as e:
-        log.error("classify_query failed", error=str(e))
-        intent = "knowledge_base_question"
+    q_lower = state["query"].lower().strip()
+    # Fast heuristic routing to prevent multi-minute LLM reasoning delays on classification
+    if re.match(r"^(hi|hello|hey|good morning|good evening|good afternoon)([!. ,]|$)", q_lower):
+        intent = "general_question"
+    elif any(k in q_lower for k in ["timetable", "schedule", "lecture", "period", "slot", "class time"]):
+        intent = "timetable_query"
+    elif any(k in q_lower for k in ["notice", "announcement", "circular", "notification", "cap round"]):
+        intent = "notice_query"
+    elif any(k in q_lower for k in ["faculty", "professor", "teacher", "hod", "dean", "director", "staff"]):
+        intent = "faculty_query"
+    elif any(k in q_lower for k in ["exam", "test", "midsem", "endsem", "semester exam"]):
+        intent = "exam_query"
+    elif any(k in q_lower for k in ["event", "fest", "hackathon", "workshop", "fdp", "vision"]):
+        intent = "event_query"
+    elif any(k in q_lower for k in ["placement", "package", "salary", "recruiter", "company", "ctc", "placed"]):
+        intent = "placement_query"
+    else:
+        college_terms = (
+            "walchand", "wce", "college", "campus", "admission", "department",
+            "course", "academic", "hostel", "library", "scholarship", "syllabus",
+            "eligibility", "fee", "fees", "student", "engineering", "attendance",
+            "policy", "policies", "rule", "rules", "exam", "test", "midsem", "endsem",
+            "cgpa", "sgpa", "atkt", "passing", "marks", "detention", "condonation",
+            "timing", "timings", "office", "holiday", "vacation", "alumni", "founder"
+        )
+        intent = "knowledge_base_question" if any(term in q_lower for term in college_terms) else "general_question"
 
     return {
         "intent": intent,
@@ -90,6 +100,7 @@ async def retrieve_context(state: AgentState, retriever) -> dict:
 
     return {
         "retrieved_documents": retrieved,
+        "context_quality": "partial" if retrieved else "insufficient",
         "retrieval_latency_ms": latency,
         "status_events": [f"Searched knowledge base ({len(retrieved)} chunks found)"],
     }
@@ -196,6 +207,34 @@ async def generate_answer(state: AgentState) -> dict:
     log.info("generate_answer")
     t0 = time.perf_counter()
 
+    for tool_result in state.get("tool_results", []):
+        if tool_result.get("tool") != "get_notices":
+            continue
+        result = tool_result.get("result", {})
+        notices = result.get("notices", []) if isinstance(result, dict) else []
+        if notices:
+            lines = ["Latest notices scraped from the official Walchand College website:"]
+            for notice in notices:
+                title = notice.get("title", "Official notice")
+                date = notice.get("date")
+                line = f"- **{title}**" + (f" ({date})" if date else "")
+                if notice.get("link"):
+                    line += f" - [Official notice]({notice['link']})"
+                lines.append(line)
+            return {
+                "answer": "\n\n".join(lines),
+                "citations": [],
+                "confidence": "high",
+                "llm_latency_ms": 0,
+            }
+        if isinstance(result, dict) and result.get("scraped") is False:
+            return {
+                "answer": result.get("note") or "No official notices could be retrieved right now.",
+                "citations": [],
+                "confidence": "low",
+                "llm_latency_ms": 0,
+            }
+
     # Build context from retrieved docs
     rag_context_parts = []
     for i, doc in enumerate(state.get("retrieved_documents", []), 1):
@@ -223,7 +262,9 @@ async def generate_answer(state: AgentState) -> dict:
         elif msg["role"] == "assistant":
             chat_history_msgs.append(AIMessage(content=msg["content"]))
 
-    llm = get_llm(streaming=False, temperature=0.1)
+    llm = get_llm(streaming=True, temperature=0.1).bind(
+        conversation_id=state["conversation_id"]
+    )
     chain = RAG_PROMPT | llm | StrOutputParser()
 
     try:
@@ -276,6 +317,14 @@ async def generate_direct_answer(state: AgentState) -> dict:
     log.info("generate_direct_answer")
     t0 = time.perf_counter()
 
+    if re.match(r"^(hi|hello|hey|good morning|good evening|good afternoon)([!. ,]|$)", state["query"].lower().strip()):
+        return {
+            "answer": "Hello! How can I help with Walchand College of Engineering?",
+            "citations": [],
+            "confidence": "high",
+            "llm_latency_ms": 0,
+        }
+
     chat_history_msgs = []
     for msg in state.get("chat_history", []):
         if msg["role"] == "user":
@@ -283,7 +332,9 @@ async def generate_direct_answer(state: AgentState) -> dict:
         elif msg["role"] == "assistant":
             chat_history_msgs.append(AIMessage(content=msg["content"]))
 
-    llm = get_llm(streaming=False, temperature=0.3)
+    llm = get_llm(streaming=True, temperature=0.3).bind(
+        conversation_id=state["conversation_id"]
+    )
     chain = DIRECT_ANSWER_PROMPT | llm | StrOutputParser()
 
     try:

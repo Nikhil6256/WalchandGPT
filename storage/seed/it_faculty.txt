@@ -1,0 +1,105 @@
+WALCHAND COLLEGE OF ENGINEERING, SANGLI
+DEPARTMENT OF INFORMATION TECHNOLOGY (IT) — FACULTY DIRECTORY
+
+Department: Information Technology (IT)
+Established: 2001
+NBA Accredited | NAAC A+
+HOD: Dr. P. K. Kharat
+
+NOTE: This is a curated faculty list for the IT department. For the most
+up-to-date information, visit: https://walchandsangli.ac.in/department-of-information-technology/
+
+─────────────────────────────────────────────────────────────────────────────
+FACULTY MEMBERS — DEPARTMENT OF INFORMATION TECHNOLOGY
+─────────────────────────────────────────────────────────────────────────────
+
+1. Dr. P. K. Kharat
+   Designation: Professor & Head of Department (HOD)
+   Department: Information Technology
+   Specialization: Distributed Systems, Cloud Computing, Network Security
+   Qualification: Ph.D. (Computer Engineering)
+
+2. Dr. S. S. Patil
+   Designation: Professor
+   Department: Information Technology
+   Specialization: Data Mining, Machine Learning, Big Data Analytics
+   Qualification: Ph.D. (Information Technology)
+
+3. Dr. A. V. Deshpande
+   Designation: Professor
+   Department: Information Technology
+   Specialization: Cybersecurity, Cryptography, Information Assurance
+   Qualification: Ph.D. (Computer Science)
+
+4. Dr. M. R. Naik
+   Designation: Associate Professor
+   Department: Information Technology
+   Specialization: Web Technologies, Software Engineering, Agile Methods
+   Qualification: Ph.D. (Computer Engineering)
+
+5. Dr. P. A. Kulkarni
+   Designation: Associate Professor
+   Department: Information Technology
+   Specialization: Internet of Things (IoT), Embedded Systems, Wireless Sensor Networks
+   Qualification: Ph.D. (Electronics & Telecommunication)
+
+6. Mr. R. B. Mane
+   Designation: Assistant Professor
+   Department: Information Technology
+   Specialization: Full Stack Development, DevOps, Cloud Architecture (AWS/Azure)
+   Qualification: M.Tech (Computer Engineering)
+
+7. Ms. P. S. Jadhav
+   Designation: Assistant Professor
+   Department: Information Technology
+   Specialization: Artificial Intelligence, Deep Learning, Computer Vision
+   Qualification: M.Tech (Information Technology), Ph.D. (Pursuing)
+
+8. Mr. V. D. Shinde
+   Designation: Assistant Professor
+   Department: Information Technology
+   Specialization: Database Management Systems, Data Warehousing, NoSQL
+   Qualification: M.Tech (Computer Science)
+
+9. Ms. N. A. More
+   Designation: Assistant Professor
+   Department: Information Technology
+   Specialization: Mobile Application Development, Human–Computer Interaction
+   Qualification: M.Tech (Information Technology)
+
+10. Mr. S. G. Patil
+    Designation: Assistant Professor
+    Department: Information Technology
+    Specialization: Operating Systems, Linux, Virtualization, Containerization (Docker/Kubernetes)
+    Qualification: M.Tech (Computer Engineering), Ph.D. (Pursuing)
+
+11. Ms. R. V. Sutar
+    Designation: Assistant Professor
+    Department: Information Technology
+    Specialization: Computer Networks, Network Programming, SDN
+    Qualification: M.Tech (Computer Engineering)
+
+12. Mr. A. M. Wani
+    Designation: Assistant Professor
+    Department: Information Technology
+    Specialization: Theory of Computation, Compiler Design, Algorithm Design
+    Qualification: M.Tech (Computer Science), Ph.D. (Pursuing)
+
+─────────────────────────────────────────────────────────────────────────────
+IT DEPARTMENT LABS
+─────────────────────────────────────────────────────────────────────────────
+
+- Data Science & Analytics Lab
+- Information Security & Cyber Lab
+- Web Engineering Lab
+- Cloud Computing Lab
+- Project Lab
+
+─────────────────────────────────────────────────────────────────────────────
+CONTACT
+─────────────────────────────────────────────────────────────────────────────
+
+Department of Information Technology
+Walchand College of Engineering, Sangli
+Vishrambag, Sangli — 416 415, Maharashtra, India
+Website: https://walchandsangli.ac.in/department-of-information-technology/

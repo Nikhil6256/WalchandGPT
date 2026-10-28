@@ -34,6 +34,7 @@ class ConversationService:
             self.db.add(conv)
             await self.db.commit()
             await self.db.refresh(conv)
+            conv.messages = []
             return conv
         except Exception:
             pass
@@ -69,6 +70,7 @@ class ConversationService:
         try:
             result = await self.db.execute(
                 select(Conversation)
+                .options(selectinload(Conversation.messages))
                 .where(Conversation.user_id == user_id)
                 .order_by(Conversation.updated_at.desc())
             )

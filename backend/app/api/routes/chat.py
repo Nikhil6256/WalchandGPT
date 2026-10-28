@@ -155,6 +155,7 @@ async def stream_chat(
 
                     yield _sse_event("done", {
                         "message_id": str(assistant_msg.id),
+                        "answer": answer,
                         "citations": final_state.get("citations", []),
                         "confidence": final_state.get("confidence", "medium"),
                         "total_latency_ms": total_latency,

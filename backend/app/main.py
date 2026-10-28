@@ -33,6 +33,14 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         log.warning("Database initialization deferred: PostgreSQL not reachable yet", error=str(e))
 
+    if settings.LLM_PROVIDER == "openai_compatible" and "qwen3.5" in settings.MODEL_NAME.lower():
+        from app.llm.provider import ensure_lm_studio_model_loaded
+        native_url = settings.OPENAI_BASE_URL.rsplit("/v1", 1)[0].rstrip("/")
+        try:
+            await ensure_lm_studio_model_loaded(native_url, settings.MODEL_NAME)
+        except Exception as e:
+            log.warning("LM Studio model preload deferred", model=settings.MODEL_NAME, error=str(e))
+
     # Initialize MCP connection pool
     from app.agents.mcp_client import mcp_client
     await mcp_client.connect()

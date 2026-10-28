@@ -5,7 +5,9 @@ Supports: openai, google, ollama, openai_compatible, with zero-crash local fallb
 import asyncio
 import re
 from typing import Any, AsyncIterator, Iterator, List, Optional
+from urllib.parse import urlsplit, urlunsplit
 
+import httpx
 import structlog
 from langchain_core.callbacks import CallbackManagerForLLMRun
 from langchain_core.embeddings import Embeddings
@@ -16,6 +18,120 @@ from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResu
 from app.core.config import settings
 
 log = structlog.get_logger(__name__)
+_LM_STUDIO_RESPONSE_IDS: dict[str, str] = {}
+
+
+class LMStudioChatModel(BaseChatModel):
+    """LangChain adapter for LM Studio's native API, with Qwen thinking disabled."""
+
+    base_url: str
+    model: str
+    temperature: float = 0.1
+    timeout: float = 120.0
+    max_output_tokens: int = 128
+
+    @property
+    def _llm_type(self) -> str:
+        return "lm-studio-native"
+
+    @property
+    def _identifying_params(self) -> dict[str, Any]:
+        return {"model": self.model, "base_url": self.base_url}
+
+    def _payload(self, messages: list[BaseMessage], kwargs: dict[str, Any]) -> dict[str, Any]:
+        system = [str(message.content) for message in messages if message.type == "system"]
+        conversation = [message for message in messages if message.type != "system"]
+        latest_user = next(
+            (message for message in reversed(conversation) if message.type == "human"),
+            None,
+        )
+        conversation_id = kwargs.get("conversation_id")
+        previous_response_id = _LM_STUDIO_RESPONSE_IDS.get(str(conversation_id))
+        payload: dict[str, Any] = {
+            "model": self.model,
+            "input": str(latest_user.content) if latest_user else "",
+            "reasoning": "off",
+            "store": True,
+            "temperature": self.temperature,
+        }
+        if previous_response_id:
+            payload["previous_response_id"] = previous_response_id
+        elif system:
+            payload["system_prompt"] = "\n\n".join(system)
+        max_tokens = kwargs.get(
+            "max_output_tokens", kwargs.get("max_tokens", self.max_output_tokens)
+        )
+        if max_tokens is not None:
+            payload["max_output_tokens"] = max_tokens
+        return payload
+
+    @staticmethod
+    def _result(data: dict[str, Any], conversation_id: Optional[str] = None) -> ChatResult:
+        parts = []
+        for item in data.get("output", []):
+            if item.get("type") == "message":
+                for part in item.get("content", []):
+                    if isinstance(part, str):
+                        parts.append(part)
+                    elif part.get("type") == "text":
+                        parts.append(part.get("text", ""))
+        if not parts and data.get("response"):
+            parts.append(str(data["response"]))
+        if conversation_id and data.get("response_id"):
+            _LM_STUDIO_RESPONSE_IDS[conversation_id] = data["response_id"]
+        return ChatResult(generations=[ChatGeneration(message=AIMessage(
+            content="".join(parts),
+            response_metadata={"stats": data.get("stats", {})},
+        ))])
+
+    def _generate(
+        self,
+        messages: list[BaseMessage],
+        stop: Optional[list[str]] = None,
+        run_manager: Optional[CallbackManagerForLLMRun] = None,
+        **kwargs: Any,
+    ) -> ChatResult:
+        payload = self._payload(messages, kwargs)
+        response = httpx.post(f"{self.base_url}/api/v1/chat", json=payload, timeout=self.timeout)
+        if response.is_error:
+            log.error("LM Studio chat request failed", status=response.status_code, body=response.text[:1000])
+            response.raise_for_status()
+        return self._result(response.json(), str(kwargs["conversation_id"]) if kwargs.get("conversation_id") else None)
+
+    async def _agenerate(
+        self,
+        messages: list[BaseMessage],
+        stop: Optional[list[str]] = None,
+        run_manager: Optional[Any] = None,
+        **kwargs: Any,
+    ) -> ChatResult:
+        payload = self._payload(messages, kwargs)
+        async with httpx.AsyncClient(timeout=self.timeout) as client:
+            response = await client.post(f"{self.base_url}/api/v1/chat", json=payload)
+            if response.is_error:
+                log.warning("LM Studio chat request failed", status=response.status_code, body=response.text[:1000])
+                if response.status_code >= 500:
+                    await ensure_lm_studio_model_loaded(self.base_url, self.model)
+                    await asyncio.sleep(0.5)
+                    response = await client.post(f"{self.base_url}/api/v1/chat", json=payload)
+            if response.is_error:
+                log.error("LM Studio chat retry failed", status=response.status_code, body=response.text[:1000])
+            response.raise_for_status()
+        return self._result(response.json(), str(kwargs["conversation_id"]) if kwargs.get("conversation_id") else None)
+
+
+async def ensure_lm_studio_model_loaded(base_url: str, model: str) -> None:
+    """Load the configured model when LM Studio has no resident instance."""
+    async with httpx.AsyncClient(timeout=120.0) as client:
+        models_response = await client.get(f"{base_url}/api/v1/models")
+        models_response.raise_for_status()
+        models = models_response.json().get("models", [])
+        matching = next((entry for entry in models if entry.get("key") == model), None)
+        if matching and matching.get("loaded_instances"):
+            return
+        response = await client.post(f"{base_url}/api/v1/models/load", json={"model": model})
+        response.raise_for_status()
+        log.info("LM Studio model loaded", model=model, load_time=response.json().get("load_time_seconds"))
 
 
 # ── Local Fallback Mock Models ────────────────────────────────────────────────
@@ -24,16 +140,16 @@ class LocalMockEmbeddings(Embeddings):
     """Fallback embeddings model when external provider API keys are not yet configured."""
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
-        return [[0.05] * 1536 for _ in texts]
+        return [[0.05] * settings.EMBEDDING_DIMENSION for _ in texts]
 
     def embed_query(self, text: str) -> list[float]:
-        return [0.05] * 1536
+        return [0.05] * settings.EMBEDDING_DIMENSION
 
     async def aembed_query(self, text: str) -> list[float]:
-        return [0.05] * 1536
+        return [0.05] * settings.EMBEDDING_DIMENSION
 
     async def aembed_documents(self, texts: list[str]) -> list[list[float]]:
-        return [[0.05] * 1536 for _ in texts]
+        return [[0.05] * settings.EMBEDDING_DIMENSION for _ in texts]
 
 
 class LocalMockChatModel(BaseChatModel):
@@ -216,11 +332,25 @@ class LocalMockChatModel(BaseChatModel):
 def get_llm(streaming: bool = False, temperature: float = 0.1) -> BaseChatModel:
     """
     Return a LangChain-compatible ChatModel based on LLM_PROVIDER setting.
-    Falls back gracefully to LocalMockChatModel if external credentials are absent.
+    Uses LM Studio's native API for Qwen 3.5 to avoid spending generation time on hidden reasoning.
     """
     provider = settings.LLM_PROVIDER
     has_openai_key = bool(settings.OPENAI_API_KEY and not settings.OPENAI_API_KEY.startswith("sk-..."))
     has_google_key = bool(settings.GOOGLE_API_KEY and not settings.GOOGLE_API_KEY.startswith("AIza..."))
+    has_groq_key = bool(settings.GROQ_API_KEY and not settings.GROQ_API_KEY.startswith("gsk_..."))
+
+    if (
+        provider == "openai_compatible"
+        and "qwen3.5" in settings.MODEL_NAME.lower()
+        and settings.OPENAI_BASE_URL
+    ):
+        parsed = urlsplit(settings.OPENAI_BASE_URL)
+        native_url = urlunsplit((parsed.scheme, parsed.netloc, "", "", "")).rstrip("/")
+        return LMStudioChatModel(
+            base_url=native_url,
+            model=settings.MODEL_NAME,
+            temperature=temperature,
+        )
 
     if (provider in ["openai", "openai_compatible"]) and has_openai_key:
         try:
@@ -234,6 +364,18 @@ def get_llm(streaming: bool = False, temperature: float = 0.1) -> BaseChatModel:
             )
         except Exception as e:
             log.warning("OpenAI LLM initialization failed, using local mock", error=str(e))
+
+    elif provider == "groq" and has_groq_key:
+        try:
+            from langchain_groq import ChatGroq
+            return ChatGroq(
+                model=settings.MODEL_NAME,
+                api_key=settings.GROQ_API_KEY,
+                streaming=streaming,
+                temperature=temperature,
+            )
+        except Exception as e:
+            log.warning("Groq LLM initialization failed, using local mock", error=str(e))
 
     elif provider == "google" and has_google_key:
         try:
@@ -258,8 +400,9 @@ def get_llm(streaming: bool = False, temperature: float = 0.1) -> BaseChatModel:
             )
         except Exception as e:
             log.warning("Ollama initialization failed, using local mock", error=str(e))
+            return LocalMockChatModel(temperature=temperature)
 
-    # Resilient local fallback
+    log.warning("No usable LLM configured, falling back to LocalMockChatModel", provider=provider)
     return LocalMockChatModel(temperature=temperature)
 
 
@@ -293,10 +436,25 @@ def get_embeddings() -> Embeddings:
             log.warning("Google Embeddings initialization failed, using local mock", error=str(e))
 
     elif provider == "huggingface":
+        # Use Inference API (no local model download needed) when HF key is available
+        if settings.HUGGINGFACE_API_KEY:
+            try:
+                from langchain_huggingface import HuggingFaceEndpointEmbeddings
+                return HuggingFaceEndpointEmbeddings(
+                    model=settings.EMBEDDING_MODEL,
+                    huggingfacehub_api_token=settings.HUGGINGFACE_API_KEY,
+                )
+            except Exception as e:
+                log.warning("HuggingFace Inference API embeddings failed, trying local", error=str(e))
+        # Fallback: local sentence-transformers (requires package installed)
         try:
             from langchain_community.embeddings import HuggingFaceEmbeddings
-            return HuggingFaceEmbeddings(model_name=settings.EMBEDDING_MODEL)
+            return HuggingFaceEmbeddings(
+                model_name=settings.EMBEDDING_MODEL,
+                encode_kwargs={"normalize_embeddings": True},
+            )
         except Exception as e:
-            log.warning("HuggingFace embeddings initialization failed, using local mock", error=str(e))
+            log.warning("HuggingFace local embeddings failed, using mock", error=str(e))
 
+    log.warning("No valid embedding credentials found, falling back to LocalMockEmbeddings", provider=provider)
     return LocalMockEmbeddings()

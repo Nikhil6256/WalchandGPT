@@ -2,13 +2,14 @@ fastapi==0.115.6
 uvicorn[standard]==0.32.1
 pydantic==2.10.3
 pydantic-settings==2.7.0
+email-validator>=2.0.0
 
 # Database
 sqlalchemy==2.0.36
 alembic==1.14.0
 asyncpg==0.30.0
 psycopg2-binary==2.9.10
-pgvector==0.3.6
+pgvector>=0.2.5,<0.3.0
 
 # Authentication
 python-jose[cryptography]==3.3.0
@@ -26,13 +27,15 @@ langchain-postgres==0.0.12
 # AI providers
 openai==1.58.1
 google-generativeai==0.8.3
+groq>=0.11.0
+langchain-groq>=0.2.0
 
 # Document processing
 pypdf==5.1.0
 python-docx==1.1.2
 python-pptx==1.0.2
 openpyxl==3.1.5
-unstructured[all-docs]==0.16.10
+unstructured==0.16.10
 nltk==3.9.1
 
 # HTTP / Streaming

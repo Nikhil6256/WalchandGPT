@@ -14,8 +14,8 @@ from app.models import Base  # noqa: F401 — import all models
 # Alembic Config object
 config = context.config
 
-# Set database URL from settings
-config.set_main_option("sqlalchemy.url", settings.SYNC_DATABASE_URL)
+# Set database URL from settings (asyncpg URL for async_engine_from_config)
+config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

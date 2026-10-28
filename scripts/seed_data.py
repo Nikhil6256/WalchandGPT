@@ -14,7 +14,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "backend"))
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-DATABASE_URL = "postgresql+asyncpg://walchand:walchand_secret@localhost:5432/walchandgpt"
+from app.core.config import settings
+
+DATABASE_URL = settings.DATABASE_URL
 
 engine = create_async_engine(DATABASE_URL)
 AsyncSessionLocal = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
@@ -110,6 +112,13 @@ async def seed_sample_documents(session: AsyncSession):
             "file_name": "current_notices_and_admissions.txt",
             "document_type": DocumentType.TXT,
             "document_category": "notice",
+        },
+        {
+            "title": "IT Department Faculty Directory — Department of Information Technology",
+            "description": "Full faculty list for the IT branch at Walchand College of Engineering, Sangli. Includes faculty names, designations, specializations, and qualifications.",
+            "file_name": "it_faculty.txt",
+            "document_type": DocumentType.TXT,
+            "document_category": "faculty",
         },
     ]
 

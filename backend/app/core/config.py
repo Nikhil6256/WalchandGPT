@@ -2,6 +2,7 @@
 Central application configuration loaded from environment variables.
 Never import secrets directly — always use this settings object.
 """
+import json
 from functools import lru_cache
 from typing import List, Literal
 
@@ -40,18 +41,20 @@ class Settings(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
 
     # ── LLM ────────────────────────────────────────────────────
-    LLM_PROVIDER: Literal["openai", "google", "ollama", "openai_compatible"] = "openai"
+    LLM_PROVIDER: Literal["openai", "google", "ollama", "openai_compatible", "groq"] = "openai"
     MODEL_NAME: str = "gpt-4o-mini"
 
     OPENAI_API_KEY: str = ""
     OPENAI_BASE_URL: str = "https://api.openai.com/v1"
     GOOGLE_API_KEY: str = ""
     OLLAMA_BASE_URL: str = "http://localhost:11434"
+    GROQ_API_KEY: str = ""
 
     # ── Embeddings ─────────────────────────────────────────────
     EMBEDDING_PROVIDER: Literal["openai", "google", "ollama", "huggingface"] = "openai"
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     EMBEDDING_DIMENSION: int = 1536
+    HUGGINGFACE_API_KEY: str = ""
 
     # ── MCP Server ─────────────────────────────────────────────
     MCP_SERVER_HOST: str = "0.0.0.0"
@@ -76,7 +79,15 @@ class Settings(BaseSettings):
     @classmethod
     def parse_cors_origins(cls, v):
         if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",")]
+            v = v.strip()
+            # Handle JSON array format: ["http://...", "http://..."]
+            if v.startswith("["):
+                try:
+                    return json.loads(v)
+                except json.JSONDecodeError:
+                    pass
+            # Fallback: plain comma-separated
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
         return v
 
     # ── Rate Limiting ──────────────────────────────────────────

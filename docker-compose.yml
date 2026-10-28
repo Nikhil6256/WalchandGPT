@@ -1,5 +1,4 @@
 services:
-  # ── PostgreSQL with pgvector ──────────────────────────────────
   postgres:
     image: pgvector/pgvector:pg16
     container_name: walchandgpt-postgres
@@ -8,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-walchand_secret}
       POSTGRES_DB: ${POSTGRES_DB:-walchandgpt}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
@@ -21,7 +20,6 @@ services:
     networks:
       - walchandgpt-net
 
-  # ── Redis ─────────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
     container_name: walchandgpt-redis
@@ -38,55 +36,43 @@ services:
     networks:
       - walchandgpt-net
 
-  # ── Backend (FastAPI) ─────────────────────────────────────────
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: walchandgpt-backend
     environment:
-      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
-      - SYNC_DATABASE_URL=postgresql://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
-      - REDIS_URL=redis://redis:6379/0
-      - MCP_SERVER_URL=http://mcp-server:8001
+      - REDIS_URL=redis://localhost:6379/0
+      - MCP_SERVER_URL=http://localhost:8001
+      - OLLAMA_BASE_URL=http://localhost:11434
     env_file:
       - .env
-    ports:
-      - "8000:8000"
     volumes:
       - ./backend:/app
       - ./storage:/app/storage
+    network_mode: host
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
     restart: unless-stopped
-    networks:
-      - walchandgpt-net
 
-  # ── MCP Server ────────────────────────────────────────────────
   mcp-server:
     build:
       context: ./mcp-server
       dockerfile: Dockerfile
     container_name: walchandgpt-mcp
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-walchand}:${POSTGRES_PASSWORD:-walchand_secret}@postgres:5432/${POSTGRES_DB:-walchandgpt}
     env_file:
       - .env
     ports:
       - "8001:8001"
     volumes:
       - ./mcp-server:/app
-    depends_on:
-      postgres:
-        condition: service_healthy
     restart: unless-stopped
     networks:
       - walchandgpt-net
 
-  # ── Frontend (Next.js) ────────────────────────────────────────
   frontend:
     build:
       context: ./frontend

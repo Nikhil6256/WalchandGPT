@@ -61,10 +61,14 @@ class HybridRetriever:
             query, k=k * 2, department=department
         )
 
-        # 4. Reciprocal Rank Fusion
-        merged = self._reciprocal_rank_fusion(
-            [vector_results, keyword_results], k=k
-        )
+        # 4. Merging results
+        is_mock_embeddings = hasattr(self.embeddings, "__class__") and "Mock" in self.embeddings.__class__.__name__
+        if is_mock_embeddings and keyword_results:
+            merged = keyword_results
+        else:
+            merged = self._reciprocal_rank_fusion(
+                [vector_results, keyword_results], k=k
+            )
 
         if not merged:
             merged = self._file_fallback_search(query, k=k)
@@ -81,7 +85,7 @@ class HybridRetriever:
         return merged[:k]
 
     def _file_fallback_search(self, query: str, k: int = 5) -> list[Document]:
-        """Search local seed files directly when database is offline."""
+        """Search local seed files directly with term-weighted relevance ranking."""
         from pathlib import Path
         import re
 
@@ -92,11 +96,22 @@ class HybridRetriever:
             return []
 
         query_words = set(re.findall(r"\w+", query.lower()))
-        # Remove common stop words
-        stop_words = {"what", "is", "the", "at", "in", "of", "and", "a", "an", "to", "for", "are", "tell", "me", "about"}
-        significant_words = query_words - stop_words
-        if not significant_words:
-            significant_words = query_words
+        stop_words = {
+            "what", "is", "the", "at", "in", "of", "and", "a", "an", "to", "for", "are",
+            "tell", "me", "about", "can", "you", "there", "any", "how", "do", "does",
+            "have", "has", "it", "its", "or", "on", "as", "by", "from", "be", "with",
+            "which", "who", "whom", "where", "when", "why", "our", "your", "my", "we", "i",
+            "give", "show", "some", "much", "many", "explain"
+        }
+        generic_institute_words = {
+            "college", "walchand", "wce", "sangli", "engineering", "institute", "campus",
+            "info", "information", "detail", "details"
+        }
+
+        content_words = query_words - stop_words
+        specific_words = content_words - generic_institute_words
+        if not specific_words:
+            specific_words = content_words or query_words
 
         matches = []
         for fpath in seed_dir.glob("*.txt"):
@@ -104,15 +119,17 @@ class HybridRetriever:
                 text_content = fpath.read_text(encoding="utf-8")
                 sections = [s.strip() for s in text_content.split("\n\n") if s.strip()]
                 for s in sections:
-                    s_words = set(re.findall(r"\w+", s.lower()))
-                    overlap = len(significant_words.intersection(s_words))
-                    if overlap > 0:
-                        matches.append((overlap, Document(
+                    s_lower = s.lower()
+                    s_words = set(re.findall(r"\w+", s_lower))
+                    specific_overlap = len(specific_words.intersection(s_words))
+                    if specific_overlap > 0:
+                        total_score = specific_overlap * 3.0 + len(content_words.intersection(s_words)) * 1.0
+                        matches.append((total_score, Document(
                             page_content=s,
                             metadata={
                                 "title": fpath.stem.replace("_", " ").title(),
                                 "source": fpath.name,
-                                "score": float(overlap),
+                                "score": float(total_score),
                                 "retrieval_method": "seed_document_search"
                             }
                         )))
@@ -154,7 +171,7 @@ class HybridRetriever:
             FROM document_chunks dc
             JOIN documents d ON dc.document_id = d.id
             WHERE {where_clause}
-                AND d.indexing_status = 'completed'
+                AND d.indexing_status::text ILIKE 'completed'
                 AND 1 - (dc.embedding <=> '{embedding_str}'::vector) > :threshold
             ORDER BY dc.embedding <=> '{embedding_str}'::vector
             LIMIT :k
@@ -192,9 +209,20 @@ class HybridRetriever:
         k: int,
         department: Optional[str],
     ) -> list[Document]:
-        """pg_trgm trigram keyword search for exact term matching."""
-        filters = ["dc.embedding IS NOT NULL", "d.indexing_status = 'completed'"]
-        params: dict = {"query": query, "k": k}
+        """pg_trgm trigram keyword search using word_similarity for exact term matching."""
+        import re
+
+        stop_words = {
+            "what", "is", "the", "at", "in", "of", "and", "a", "an", "to", "for", "are",
+            "tell", "me", "about", "can", "you", "there", "any", "how", "do", "does",
+            "have", "has", "it", "its", "or", "on", "as", "by", "from", "be", "with",
+            "college", "walchand", "wce", "sangli"
+        }
+        words = [w for w in re.findall(r"\w+", query.lower()) if w not in stop_words]
+        clean_query = " ".join(words) if words else query
+
+        filters = ["dc.embedding IS NOT NULL", "d.indexing_status::text ILIKE 'completed'"]
+        params: dict = {"query": query, "clean_query": clean_query, "k": k}
 
         if department:
             filters.append("d.department = :department")
@@ -212,11 +240,19 @@ class HybridRetriever:
                 d.id as doc_id,
                 d.department,
                 d.document_type,
-                similarity(dc.content, :query) as sim_score
+                GREATEST(
+                    word_similarity(:clean_query, dc.content),
+                    word_similarity(:query, dc.content),
+                    similarity(dc.content, :clean_query)
+                ) as sim_score
             FROM document_chunks dc
             JOIN documents d ON dc.document_id = d.id
             WHERE {where_clause}
-                AND similarity(dc.content, :query) > 0.1
+                AND (
+                    word_similarity(:clean_query, dc.content) > 0.2
+                    OR word_similarity(:query, dc.content) > 0.2
+                    OR similarity(dc.content, :clean_query) > 0.1
+                )
             ORDER BY sim_score DESC
             LIMIT :k
         """)

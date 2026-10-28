@@ -11,13 +11,14 @@ from app.models import Base
 log = structlog.get_logger(__name__)
 
 # Create the async engine
-# NullPool is used in tests; for production AsyncAdaptedQueuePool is used by default
+# Supabase uses pgBouncer in transaction pooling mode — NullPool is required
+# because persistent connection pools are incompatible with pgBouncer's
+# transaction mode. Each request gets a fresh connection from Supabase's pool.
 engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.DEBUG,
     pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20,
+    poolclass=NullPool,
 )
 
 AsyncSessionLocal = async_sessionmaker(

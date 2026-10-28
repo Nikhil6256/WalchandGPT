@@ -1,0 +1,81 @@
+WALCHAND COLLEGE OF ENGINEERING, SANGLI
+[Autonomous Institute Affiliated to Shivaji University, Kolhapur]
+ACADEMIC RULES, ATTENDANCE REGULATIONS & EXAMINATION POLICIES
+
+=== 1. ATTENDANCE POLICY & REGULATIONS ===
+
+Q: What is the mandatory attendance requirement at Walchand College of Engineering (WCE)?
+A: At Walchand College of Engineering, Sangli (Autonomous Institute), every registered student must maintain a minimum attendance of 75% in each theory course, tutorial, practical/laboratory session, workshop, and seminar in every semester, in compliance with WCE Autonomous Academic Regulations and Shivaji University / AICTE guidelines.
+
+Q: Can attendance shortage be condoned on medical or special grounds?
+A: Yes. A relaxation (condonation) of up to 10% may be granted by the Director upon recommendation of the Dean (Academics) and Head of Department (HOD) strictly on the following grounds:
+1. Medical emergencies, illness, or hospitalization, provided an authentic medical certificate and prescription from a registered medical practitioner is submitted to the HOD within one week of returning to college.
+2. Official participation representing WCE Sangli in university, state, or national-level sports, technical competitions, cultural fests, hackathons, or authorized NCC/NSS camps.
+With condonation, the absolute minimum attendance requirement is 65%. Attendance below 65% cannot be condoned under any circumstances.
+
+Q: What happens if a student has attendance below 75% (Detention Policy)?
+A: Students with attendance below 75% in a course (or below 65% with approved medical/official condonation) are categorized as "Defaulters" and awarded an 'XX' grade (Detained due to attendance shortage) in that specific course.
+- Detained students are strictly barred from appearing in the End-Semester Examination (ESE) for that course.
+- The student must re-register for the course and repeat all classroom and laboratory work when the course is offered in subsequent regular semesters or summer terms.
+
+Q: How is attendance monitored and tracked?
+A: Attendance is recorded on a lecture-by-lecture basis by course instructors and updated weekly on the College Management Information System (MIS) / Student ERP Portal. Each department publishes a monthly Defaulter List on department notice boards. Parents/guardians are notified via SMS/email if a student's attendance falls below 75%.
+
+Q: What is the attendance requirement for Laboratory / Practical sessions?
+A: Laboratory and practical attendance requires 100% completion of assigned lab experiments, assignments, and continuous assessments (term work). In cases of approved leave, the student must complete makeup practical sessions with the consent of the lab in-charge before term end.
+
+=== 2. EXAMINATION & EVALUATION SCHEME ===
+
+Q: What is the evaluation and examination structure at WCE Sangli?
+A: WCE follows a comprehensive Continuous Assessment and Evaluation scheme:
+1. In-Semester Evaluation (ISE): 20% weightage based on surprise tests, home assignments, quizzes, seminars, or mini-projects.
+2. Mid-Semester Examination (MSE): 30% weightage, conducted centrally at the middle of the semester covering Units 1 to 3.
+3. End-Semester Examination (ESE): 50% weightage, conducted centrally at the conclusion of the semester covering the entire syllabus.
+Total: 100 Marks per theory course.
+
+Q: What are the passing criteria for courses at WCE?
+A: To pass a course, a student must obtain:
+1. A minimum of 40% marks in the End-Semester Examination (ESE) (i.e., minimum 20 out of 50 marks).
+2. A minimum aggregate of 40% across ISE + MSE + ESE combined.
+3. For laboratory/practical courses (Term Work / Oral / Practical Exam), a minimum of 40% in continuous lab assessment and practical exam.
+
+Q: What is the grading system and SGPA/CGPA calculation?
+A: WCE uses a 10-point letter grading scale:
+- O (Outstanding): Grade Point 10 (Marks >= 90%)
+- A+ (Excellent): Grade Point 9 (Marks 80-89%)
+- A (Very Good): Grade Point 8 (Marks 70-79%)
+- B+ (Good): Grade Point 7 (Marks 60-69%)
+- B (Above Average): Grade Point 6 (Marks 50-59%)
+- C (Average): Grade Point 5 (Marks 45-49%)
+- P (Pass): Grade Point 4 (Marks 40-44%)
+- F (Fail): Grade Point 0 (Marks < 40%)
+- XX: Detained due to shortage of attendance
+- AB: Absent
+Semester Grade Point Average (SGPA) and Cumulative Grade Point Average (CGPA) are computed as the credit-weighted average of grade points earned.
+
+=== 3. ATKT (ALLOWED TO KEEP TERM) & PROMOTION RULES ===
+
+Q: What are the ATKT and year promotion rules?
+A:
+- Promotion to Second Year (SY B.Tech): A student must earn at least 50% of the total prescribed credits for the First Year (FY B.Tech).
+- Promotion to Third Year (TY B.Tech): A student must have earned 100% credits of First Year (clear all FY backlogs) and at least 50% credits of Second Year.
+- Promotion to Final Year (B.Tech): A student must have earned 100% credits of Second Year (clear all SY backlogs) and at least 50% credits of Third Year.
+- Re-examination: Supplementary/makeup examinations are conducted immediately after the declaration of ESE results for students with 'F' grades.
+
+=== 4. CAMPUS DISCIPLINE, TIMINGS & FACILITIES ===
+
+Q: What are the college operating hours and office timings?
+A:
+- Academic Instruction (Classes & Labs): 8:00 AM to 5:30 PM (Monday through Friday; working Saturdays as per the institute academic calendar).
+- Administrative & Accounts Office: 10:00 AM to 5:00 PM.
+- Ajit Gulabchand Central Library: 8:00 AM to 8:00 PM on working days. The reading hall remains open until 11:00 PM during examination periods.
+- WIC (Walchand Informatics Centre) Computer Center: 8:00 AM to 8:00 PM.
+
+Q: What is the student dress code and identity card policy?
+A: Students must wear their official WCE RFID Identity Card visibly on campus at all times. Formal and dignified attire is required. ID cards are mandatory for entering laboratories, the central library, and examination halls.
+
+Q: What is the college anti-ragging policy?
+A: WCE maintains a strict ZERO-TOLERANCE policy towards ragging in any form, on campus or in hostels, in accordance with the Maharashtra Prohibition of Ragging Act and Supreme Court regulations. All incidents must be reported immediately to the Anti-Ragging Committee or the 24/7 Institute Helpline. Ragging leads to immediate suspension, FIR registration, and expulsion from the institute.
+
+Q: How can students access scholarships and freeships?
+A: Students eligible for Government scholarships (EBC, TFWS, SC/ST/OBC/VJNT Freeship, Minority Scholarship, and Dr. Panjabrao Deshmukh Hostel Maintenance Allowance) must apply through the Government of Maharashtra MahaDBT portal. The College Scholarship Section assists with document verification and scheme processing.

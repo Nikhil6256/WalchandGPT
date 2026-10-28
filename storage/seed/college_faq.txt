@@ -123,3 +123,24 @@ A: Yes, WCE provides separate on-campus hostel facilities for boys and girls wit
 
 Q: What student clubs and technical activities are active on campus?
 A: Active clubs include ACM Student Chapter, CSI (Computer Society of India), IEEE Student Branch, WLUG (Walchand Linux Users Group), Rotaract Club, SOFTA, MESA, CESA, ELESA, EESA, and Art & Cultural Clubs. Annual technical and cultural festivals attract thousands of participants across Maharashtra.
+
+=== 8. ACADEMIC RULES, ATTENDANCE & EXAMINATION POLICIES ===
+
+Q: What is the attendance policy and minimum attendance required at WCE?
+A: Walchand College of Engineering strictly enforces a minimum attendance of 75% in each registered theory course, tutorial, practical/laboratory session, workshop, and seminar per semester, in accordance with WCE Autonomous Academic Regulations and Shivaji University / AICTE norms.
+- Condonation: Up to 10% relaxation (allowing a minimum 65% attendance) may be granted by the Director / Dean Academics strictly on valid medical grounds (with doctor's certificate submitted within 7 days) or officially sanctioned institute-level representation in sports, technical competitions, hackathons, or NCC/NSS.
+- Detention ('XX' Grade): Students failing to secure 75% attendance (or 65% with approved condonation) are awarded an 'XX' grade and detained. Detained students are not permitted to appear for the End-Semester Examination (ESE) and must re-register for the course.
+- Monitoring: Attendance is updated weekly on the College MIS / ERP portal. Monthly defaulter lists are displayed on department notice boards.
+
+Q: What is the examination and evaluation system at WCE?
+A: WCE follows a continuous 100-mark evaluation structure:
+- In-Semester Evaluation (ISE): 20% weightage (tests, quizzes, assignments).
+- Mid-Semester Examination (MSE): 30% weightage (Units 1-3).
+- End-Semester Examination (ESE): 50% weightage (comprehensive syllabus).
+Passing requires at least 40% in ESE (20/50 marks) and an aggregate of 40% across ISE + MSE + ESE.
+
+Q: What are the college operating hours and library timings?
+A:
+- Academic Hours (Lectures & Labs): 8:00 AM to 5:30 PM (Monday–Friday).
+- Administrative Office: 10:00 AM to 5:00 PM.
+- Ajit Gulabchand Central Library: 8:00 AM to 8:00 PM (Reading hall open till 11:00 PM during exams).
